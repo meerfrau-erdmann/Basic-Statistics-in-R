@@ -1,0 +1,326 @@
+---
+title: "Basic Statistics in R"
+author: "Sandra Erdmann"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Section{.tabset}
+
+## Basics
+
+To create a **Markdown** file, click on 
+
+
+
+### Short cuts
+
+Control+Alt+i : insert new chunk
+
+Control+Shift+Enter : run current chunk
+
+Control+Shift+m : %>% 
+
+### Equations
+
+```{r}
+# $$ mu = 5 $$
+```
+
+$$ mu = 5 $$
+
+
+### Load datasets
+
+To load a dataset, you type : dataset<- read.csv('C:/Users/admin/Desktop/R-Course by Murray/07092018/dataset.csv', strip.white=T)
+
+strip.white=T means, that you exclude all spaces in your excel file to avoid complications.
+
+For import, simply run the chunk, which contains your dataset
+
+
+### Github
+
+Is a platform to store your latest R Studio versions and if you wish to work on R projects with others.
+
+Follow these instructions: http://r-pkgs.had.co.nz/git.html
+
+Install Git first with this link:  http://git-scm.com/download/win.
+
+Click on Tools and choose global options. Click on Git/SVN and click on 'Create RSA key'. Add the key to https://github.com/settings/ssh.
+
+Now create a new repository. Click on Tools and then project options, Click on Git/SVN and chose version control GIT
+
+You can create new repositories, create new branches, make and commit branches,
+
+
+## Statistical terms
+
+https://select-statistics.co.uk/resources/glossary-page/
+
+
+
+**Chi-Square** :
+
+**confidence intervals** :
+
+**continous vs. discrete** : 
+
+**degrees of freedom** :
+
+**dependent vs. independent variable** : 
+
+**Maximum Likelihood** : gets used in generalized linear models
+
+**Multicolinearity** : When there are linear relationships (correlations) between two or more of the potential drivers; this can lead to difficulty in the interpretation of the model coefficients. Example: a questionnaire might ask whether the staff were friendly, and also whether they were helpful, which we would expect to be highly related. There are various statistical approaches that can be used to deal with multicollienarity, including the use of principal component analysis PCA to reduce the number of potential drivers to a set of linearly uncorrelated variables. 
+
+**numeric** : 
+
+**OLS** : Least Squares; gets used in linear models
+
+**PCA** : principal component analysis
+
+**R Square** :
+
+
+## Libraries
+
+To install libraries in R type: install.packages("name_of_library")
+
+To load libraries in R Studio type: library(name_of_library)
+
+**library(car)** : for regressions
+
+**library(emmeans)** : for the function emmeans
+
+**library(glmTBB)** : to fit laPlace
+
+**library(lme4)** : to fit lme and lmer
+
+**library(MuMIn)** : to compare AIC's
+
+**library(rstanarm)** : for Bayesian models
+
+**library(tidyverse)** : contains main functions, such as  NOTE: Always load the the end to avoid masking of standard functions
+
+**library(vegan)** : for PCA's
+
+## Functions
+
+**abline(data.model)** : to fit a regression line through your model
+
+### Data wrangling
+
+**mutate** :
+
+**head(data)** : displays the first 6 rows of your dataset
+
+### something else
+
+
+
+## Plots
+
+**plot**
+
+**ggplot**
+
+**homogeneity** : 
+
+The **box plot** (a.k.a. box and whisker diagram) is a standardized way of displaying the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum
+
+**scatterplot**
+
+
+## Which model to choose?
+
+https://help.xlstat.com/customer/en/portal/articles/2062461-which-statistical-model-should-you-choose-?b_id=9283
+
+http://www.dataanalytics.org.uk/Data%20Analysis/Statistics/choosing-your-stats-test.htm
+
+
+
+
+(1)  Fit the model
+
+Fitting a model to data means choosing the statistical model that predicts values as close as possible to the ones observed in your population.
+
+There are many keys to decide which distribution and model to fit. Start up with the following questions:
+
+(a) Is the data normally distributed? If yes, fit a lm. If not, normalize by log or other transformations.
+
+(b) Which and how many dependent and independent variables does the experiment contain?
+
+(c) Does your experiment have random and/or fixed effects? If so, use mixed effects models.
+
+(d) Do you prefer to use a Bayesian model?
+
+
+(2)  Validate the model
+
+There are different methods that you can use to do so. The best approach is to cross-validate and choose the model with the highest R² , which measures how much of the total variability in your data is accounted for by the model. However, as it is global measure of fit, a high R² doesn’t guarantee a valid model.
+Therefore, the main tool used is the Residual Analysis, which gives a more immediate and clear illustration of the relationship between the model and the data used.
+While doing a statistial analysis, it’s very important to make sure about the Godness of Fit of the model used.
+
+In a nutshell, validation is looking at the residuals vs. standardized residuals, Cook's distance, etc.
+If you deny the model, because these values don't look good, check for the lack of fit, which is a comparison to a chi square. The value that should be greater than 0.5.
+
+## Gaussian Model
+
+Assumptions:
+- normal distributed data
+
+
+
+## Poisson Model
+
+Assumptions:
+
+If the plot shows that there is a relationship between the mean and the variance, which you can see by the high noise near the low values and the rare dots at high values (called wedge), you cannot use models assuming a normal distribution, because it is a massive violation of linear regression.
+
+Often non-normality and unequal variance are linked: if we fix one, we can fix the other. So we can log transform our data to make the dataset having a normal distribution. Log transformation is possible if there are no zeros, we can check by the function summary and check for the lowest value
+
+## Binomial model
+
+## Negative Binomial
+
+## Beta
+
+## Beta zero inflated
+
+## Gamma
+
+## ANOVA
+
+## ANCOVA
+
+Assumptions:
+
+- linearity of regression
+- homogeneity of error variances
+- independence of error terms
+- normality of error terms
+- homogeneity of error slopes
+
+
+## Multivariate Analysis or PCA
+
+Assumptions:
+
+linearity and normality (not for Q-Mode, only for R-Mode)
+
+community questions
+useful for correllated things, because the idea is to combine things in order to get patterns
+if there are the same abundances of plant, they might have the same response to some aspect, so we are interested in the underliying drivers and conditions that cause those correllations
+
+Terminology
+**R Mode**: combine data on the basis of correlation, PCA, Principle coordinate analysis or principal correspondant analysis; the resulted variable from the combined variable can be used in any other analysis (univariate analysis), hypothesis test 
+
+disadvantage/ assumptions:
+linearity and normality, likke running regressions
+
+Alternative/ **Q Mode**: is multidimensional scaling, anasim, permanova, work on the rows and not the columns; implication is the comnbinations you get they are not independent number, so cnnot be used in analysis like regression or mixed effects model or anything similar to that, because they are not independent to another
+on the plus side, flexible in the patterns things can be combined; don't assume linearity and normality
+
+
+standardization:
+you can now blend r mode to q mode and vice versa, most try to use a blend of both scenarios
+but, you can have issue with data standardization, because mathematically large number always have moreinfluence; for example: two species have different high number, species 3 has higher number than specs3, rare taxa have almsot no weight on outcome, maybe you might not want that, if you want to even up contributions, we NEED to standardize for species abundance (this exm might be easy). It might not be so easy for others. you can also standardize your sides if they have different amount of abundancies. so do you need to standardize coloumns(/max) and rows(/sum)?
+double standardization is called: 
+
+normality:
+also important to consider normality. for this analysis squre root transformation is ok, becase we never backtransform. the outcome is unitless, so the log scale or normal scale doesn't matter. 
+
+
+Axis rotation or eigen analysis (p.7)
+
+http://www.flutterbys.com.au/stats/downloads/slides/pres.14.pdf
+
+3D display (x,y,z); by rotation of the axis, one axis (1) explains the highest amount of the point, the next axis (2) explain the next amount of variablity, same as the last axis (3), whidh doesn't have much noise along this axis, hence we don't need this anymore, so could exclude that one in order to explain most of the pattern. so i get a new variable on  axis1 from 3 to 1; this variable i can use in another analysis; thus, i can test against rainfall or any other effect and then make a statement about the community, if the y respond to that equally or not. the part we missed axis (3), but it is the individual response, but not the major pattern according to the community.
+PCA = principle analysis
+
+Q mode analysis are by a row; dissimirity. how similar is site 2 to site 1 accroding to the species abundance
+pres 15, page 4: dissimilarity
+
+calculate diddimilarity
+
+euqulidian distance? disadvantage: when two things have nothing in commont they are considered simliiar, no elefants, neg property, we prefer what they have in common, advantage: it retains the units of the measurements
+
+bray curtis distance: based on 0 (completely the same) and 1 (completely different), joint abstances are ignored, 
+
+
+Multidimensional scaling
+
+dissimilarity is a triangle mirrow, that shows the similarity of the sites based on the entire data we collected
+(1) create distance matrix (genuine data)
+(2) choose dimensions: how many new axis do we want? and it optimized for the best two or three axis
+(3) random configuration: put the sites on a blank paper; correlate triangles to check on correlation
+Stress: 1-R2 to check on the power; high r2 is 0.8, which is a stress of <0.2
+(4) measure: move your sites to improve your site position, 
+(5)
+(6) continual to iterate: thus you increate your iterations until you lower your stress
+
+non metric regression -> non metric regressional scale
+
+When to stop your iterations?
+
+(1) if your stress has a certain value, then stop, determine a threshold of the stress value
+(2) check (7)
+
+to combat what?
+(1) multiple random starts
+(2) you run a pco first to get a rough idea where they should or could be and than do another random start
+
+(7) procrustes rotation: the axis mean nothing; staple plots of the sites to see how much i stretched the sites left or right; they line up pretty close; we sum up the "residuals", if it is leess than a certain number and then your ok; until you get a match, you stop
+
+function metaMDS does the following:
+
+- if we haven't scaled or standardized the data, it will scale it
+- it generates dissimilarity, if you haven't done that
+- it runs then a PCoA to get the starting configuration
+- followed up by up to 20 random starts
+- because axis doesn't mean, it rotates the axis to get the 
+
+(1) R-Mode
+
+
+
+(1) Q-Mode
+
+Standardize to mean and variance (scale transformation - center and scale):
+
+Square root transformation is ok, because we don't want to backtransform anyways, because the results of a multivariate analysis are dimensionless and unitless.
+
+## GLMM
+
+Generalized linear mixed effects models (pres. 11.2a)
+
+glmer
+
+glmmTBB : LaPlace newer approach in the package glmTBB
+
+Additional assumptions
+- dispersion
+- (multi)collinearity
+- design balance and Type III (marginal) SS
+- heteroscadacity
+- spatial/temporal autocorrelation
+
+## GAM
+
+non-linear generalized additive models
+
+## MCMC
+
+Markov Chain Monte Carlo
+
+## Import and Export
+
+In order to **import** a dataset, you need to convert an Excel file into a csv file.
+
+To **export** from R into a publication, 
+

@@ -1,0 +1,503 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Basic Statistics in R},
+            pdfauthor={Sandra Erdmann},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Basic Statistics in R}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Sandra Erdmann}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\section{Section}\label{section}
+
+\subsection{Basics}\label{basics}
+
+To create a \textbf{Markdown} file, click on
+
+\subsubsection{Short cuts}\label{short-cuts}
+
+Control+Alt+i : insert new chunk
+
+Control+Shift+Enter : run current chunk
+
+Control+Shift+m : \%\textgreater{}\%
+
+\subsubsection{Equations}\label{equations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# $$ mu = 5 $$}
+\end{Highlighting}
+\end{Shaded}
+
+\[ mu = 5 \]
+
+\subsubsection{Load datasets}\label{load-datasets}
+
+To load a dataset, you type : dataset\textless{}-
+read.csv(`C:/Users/admin/Desktop/R-Course by
+Murray/07092018/dataset.csv', strip.white=T)
+
+strip.white=T means, that you exclude all spaces in your excel file to
+avoid complications.
+
+For import, simply run the chunk, which contains your dataset
+
+\subsubsection{Github}\label{github}
+
+Is a platform to store your latest R Studio versions and if you wish to
+work on R projects with others.
+
+Follow these instructions: \url{http://r-pkgs.had.co.nz/git.html}
+
+Install Git first with this link: \url{http://git-scm.com/download/win}.
+
+Click on Tools and choose global options. Click on Git/SVN and click on
+`Create RSA key'. Add the key to \url{https://github.com/settings/ssh}.
+
+Now create a new repository. Click on Tools and then project options,
+Click on Git/SVN and chose version control GIT
+
+You can create new repositories, create new branches, make and commit
+branches,
+
+\subsection{Statistical terms}\label{statistical-terms}
+
+\url{https://select-statistics.co.uk/resources/glossary-page/}
+
+\textbf{degrees of freedom} :
+
+\textbf{Chi-Square} :
+
+\textbf{confidence intervals} :
+
+\textbf{Maximum Likelihood} : gets used in generalized linear models
+
+\textbf{Multicolinearity} : When there are linear relationships
+(correlations) between two or more of the potential drivers; this can
+lead to difficulty in the interpretation of the model coefficients.
+Example: a questionnaire might ask whether the staff were friendly, and
+also whether they were helpful, which we would expect to be highly
+related. There are various statistical approaches that can be used to
+deal with multicollienarity, including the use of principal component
+analysis PCA to reduce the number of potential drivers to a set of
+linearly uncorrelated variables.
+
+\textbf{OLS} : Least Squares; gets used in linear models
+
+\textbf{PCA} : principal component analysis
+
+\textbf{R Square} :
+
+\subsection{Libraries}\label{libraries}
+
+To install libraries in R type: install.packages(``name\_of\_library'')
+
+To load libraries in R Studio type: library(name\_of\_library)
+
+\textbf{library(car)} : for regressions
+
+\textbf{library(emmeans)} : for the function emmeans
+
+\textbf{library(lme4)} : to fit lme and lmer
+
+\textbf{library(MuMIn)} : to compare AIC's
+
+\textbf{library(rstanarm)} : for Bayesian models
+
+\textbf{library(tidyverse)} : contains main functions, such as NOTE:
+Always load the the end to avoid masking of standard functions
+
+\textbf{library(vegan)} : for PCA's
+
+\subsection{Functions}\label{functions}
+
+\textbf{abline(data.model)} : to fit a regression line through your
+model
+
+\subsubsection{Data wrangling}\label{data-wrangling}
+
+\textbf{mutate} :
+
+\textbf{head(data)} : displays the first 6 rows of your dataset
+
+\subsubsection{something else}\label{something-else}
+
+\subsection{Plots}\label{plots}
+
+\textbf{plot}
+
+\textbf{ggplot}
+
+\textbf{homogeneity} :
+
+The \textbf{box plot} (a.k.a. box and whisker diagram) is a standardized
+way of displaying the distribution of data based on the five number
+summary: minimum, first quartile, median, third quartile, and maximum
+
+\textbf{scatterplot}
+
+\subsection{Which model to choose?}\label{which-model-to-choose}
+
+\url{https://help.xlstat.com/customer/en/portal/articles/2062461-which-statistical-model-should-you-choose-?b_id=9283}
+
+\url{http://www.dataanalytics.org.uk/Data\%20Analysis/Statistics/choosing-your-stats-test.htm}
+
+Fitting a model to data means choosing the statistical model that
+predicts values as close as possible to the ones observed in your
+population.
+
+There are different methods that you can use to do so. The best approach
+is to cross-validate and choose the model with the highest R² , which
+measures how much of the total variability in your data is accounted for
+by the model. However, as it is global measure of fit, a high R² doesn't
+guarantee a valid model. Therefore, the main tool used is the Residual
+Analysis, which gives a more immediate and clear illustration of the
+relationship between the model and the data used. While doing a
+statistial analysis, it's very important to make sure about the Godness
+of Fit of the model used.
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\item
+  Fit the model
+\item
+  Validate the model
+\end{enumerate}
+
+validation is looking at the residuals vs.~standardized residuals,
+Cook's distance, etc. If you deny the model, because these values don't
+look good, check for the lack of fit, which is a comparison to a chi
+square. The value that should be greater than 0.5.
+
+\subsection{Gaussian Model}\label{gaussian-model}
+
+Assumptions: - normal distributed data
+
+\subsection{Poisson Model}\label{poisson-model}
+
+Assumptions:
+
+If the plot shows that there is a relationship between the mean and the
+variance, which you can see by the high noise near the low values and
+the rare dots at high values (called wedge), you cannot use models
+assuming a normal distribution, because it is a massive violation of
+linear regression.
+
+Often non-normality and unequal variance are linked: if we fix one, we
+can fix the other. So we can log transform our data to make the dataset
+having a normal distribution. Log transformation is possible if there
+are no zeros, we can check by the function summary and check for the
+lowest value
+
+\subsection{Binomial model}\label{binomial-model}
+
+\subsection{Negative Binomial}\label{negative-binomial}
+
+\subsection{Beta}\label{beta}
+
+\subsection{Beta zero inflated}\label{beta-zero-inflated}
+
+\subsection{Gamma}\label{gamma}
+
+\subsection{ANOVA}\label{anova}
+
+\subsection{ANCOVA}\label{ancova}
+
+Assumptions:
+
+\begin{itemize}
+\tightlist
+\item
+  linearity of regression
+\item
+  homogeneity of error variances
+\item
+  independence of error terms
+\item
+  normality of error terms
+\item
+  homogeneity of error slopes
+\end{itemize}
+
+\subsection{Multivariate Analysis or
+PCA}\label{multivariate-analysis-or-pca}
+
+Assumptions:
+
+linearity and normality (not for Q-Mode, only for R-Mode)
+
+community questions useful for correllated things, because the idea is
+to combine things in order to get patterns if there are the same
+abundances of plant, they might have the same response to some aspect,
+so we are interested in the underliying drivers and conditions that
+cause those correllations
+
+Terminology \textbf{R Mode}: combine data on the basis of correlation,
+PCA, Principle coordinate analysis or principal correspondant analysis;
+the resulted variable from the combined variable can be used in any
+other analysis (univariate analysis), hypothesis test
+
+disadvantage/ assumptions: linearity and normality, likke running
+regressions
+
+Alternative/ \textbf{Q Mode}: is multidimensional scaling, anasim,
+permanova, work on the rows and not the columns; implication is the
+comnbinations you get they are not independent number, so cnnot be used
+in analysis like regression or mixed effects model or anything similar
+to that, because they are not independent to another on the plus side,
+flexible in the patterns things can be combined; don't assume linearity
+and normality
+
+standardization: you can now blend r mode to q mode and vice versa, most
+try to use a blend of both scenarios but, you can have issue with data
+standardization, because mathematically large number always have
+moreinfluence; for example: two species have different high number,
+species 3 has higher number than specs3, rare taxa have almsot no weight
+on outcome, maybe you might not want that, if you want to even up
+contributions, we NEED to standardize for species abundance (this exm
+might be easy). It might not be so easy for others. you can also
+standardize your sides if they have different amount of abundancies. so
+do you need to standardize coloumns(/max) and rows(/sum)? double
+standardization is called:
+
+normality: also important to consider normality. for this analysis squre
+root transformation is ok, becase we never backtransform. the outcome is
+unitless, so the log scale or normal scale doesn't matter.
+
+Axis rotation or eigen analysis (p.7)
+
+\url{http://www.flutterbys.com.au/stats/downloads/slides/pres.14.pdf}
+
+3D display (x,y,z); by rotation of the axis, one axis (1) explains the
+highest amount of the point, the next axis (2) explain the next amount
+of variablity, same as the last axis (3), whidh doesn't have much noise
+along this axis, hence we don't need this anymore, so could exclude that
+one in order to explain most of the pattern. so i get a new variable on
+axis1 from 3 to 1; this variable i can use in another analysis; thus, i
+can test against rainfall or any other effect and then make a statement
+about the community, if the y respond to that equally or not. the part
+we missed axis (3), but it is the individual response, but not the major
+pattern according to the community. PCA = principle analysis
+
+Q mode analysis are by a row; dissimirity. how similar is site 2 to site
+1 accroding to the species abundance pres 15, page 4: dissimilarity
+
+calculate diddimilarity
+
+euqulidian distance? disadvantage: when two things have nothing in
+commont they are considered simliiar, no elefants, neg property, we
+prefer what they have in common, advantage: it retains the units of the
+measurements
+
+bray curtis distance: based on 0 (completely the same) and 1 (completely
+different), joint abstances are ignored,
+
+Multidimensional scaling
+
+dissimilarity is a triangle mirrow, that shows the similarity of the
+sites based on the entire data we collected (1) create distance matrix
+(genuine data) (2) choose dimensions: how many new axis do we want? and
+it optimized for the best two or three axis (3) random configuration:
+put the sites on a blank paper; correlate triangles to check on
+correlation Stress: 1-R2 to check on the power; high r2 is 0.8, which is
+a stress of \textless{}0.2 (4) measure: move your sites to improve your
+site position, (5) (6) continual to iterate: thus you increate your
+iterations until you lower your stress
+
+non metric regression -\textgreater{} non metric regressional scale
+
+When to stop your iterations?
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  if your stress has a certain value, then stop, determine a threshold
+  of the stress value
+\item
+  check (7)
+\end{enumerate}
+
+to combat what? (1) multiple random starts (2) you run a pco first to
+get a rough idea where they should or could be and than do another
+random start
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  procrustes rotation: the axis mean nothing; staple plots of the sites
+  to see how much i stretched the sites left or right; they line up
+  pretty close; we sum up the ``residuals'', if it is leess than a
+  certain number and then your ok; until you get a match, you stop
+\end{enumerate}
+
+function metaMDS does the following:
+
+\begin{itemize}
+\tightlist
+\item
+  if we haven't scaled or standardized the data, it will scale it
+\item
+  it generates dissimilarity, if you haven't done that
+\item
+  it runs then a PCoA to get the starting configuration
+\item
+  followed up by up to 20 random starts
+\item
+  because axis doesn't mean, it rotates the axis to get the
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\item
+  R-Mode
+\item
+  Q-Mode
+\end{enumerate}
+
+Standardize to mean and variance (scale transformation - center and
+scale):
+
+Square root transformation is ok, because we don't want to backtransform
+anyways, because the results of a multivariate analysis are
+dimensionless and unitless.
+
+\subsection{GLMM}\label{glmm}
+
+Generalized linear mixed effects models (pres. 11.2a)
+
+\subsection{GAM}\label{gam}
+
+non-linear generalized additive models
+
+\subsection{Import and Export}\label{import-and-export}
+
+In order to \textbf{import} a dataset, you need to convert an Excel file
+into a csv file.
+
+To \textbf{export} from R into a publication,
+
+
+\end{document}
