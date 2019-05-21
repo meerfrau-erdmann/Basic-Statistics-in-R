@@ -97,6 +97,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -104,14 +107,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -127,27 +190,62 @@ $(document).ready(function () {
 </div>
 
 
-<div id="section" class="section level1 tabset">
-<h1>Section</h1>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<div id="basic-statistics-in-r" class="section level1 tabset">
+<h1>Basic Statistics in R</h1>
+<p><a href="http://www.flutterbys.com.au/stats/" class="uri">http://www.flutterbys.com.au/stats/</a></p>
 <div id="basics" class="section level2">
 <h2>Basics</h2>
-<p>To create a <strong>Markdown</strong> file, click on</p>
+<div id="markdown" class="section level3">
+<h3>Markdown</h3>
+<p>To create a <strong>Markdown</strong> file, choose ‘R Markdown&quot; clicking on the plus symbol below the ’File’ tab.</p>
+<p>Markdown trick: This addition in your chunk title will avoid to rerun the model in the Markdown file!!! Do not do that for your libraries though!</p>
+<pre><code>{r mckeonModel, cache=TRUE}</code></pre>
+</div>
 <div id="short-cuts" class="section level3">
 <h3>Short cuts</h3>
-<p>Control+Alt+i : insert new chunk</p>
-<p>Control+Shift+Enter : run current chunk</p>
-<p>Control+Shift+m : %&gt;%</p>
+<pre><code>Control+Alt+i : insert new chunk
+Control+Shift+Enter : run current chunk
+Control+Shift+m : %&gt;% </code></pre>
 </div>
 <div id="equations" class="section level3">
 <h3>Equations</h3>
-<pre class="r"><code># $$ mu = 5 $$</code></pre>
-<p><span class="math display">\[ mu = 5 \]</span></p>
+<p><a href="http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html" class="uri">http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html</a></p>
+<p>To include equations into a text use only one dollar sign. If you wish to display the equation in a seperate line, then use two dollar signs.</p>
+<p>Here are some examples:</p>
+<pre><code>$$ \mu = 5 $$</code></pre>
+<p><span class="math display">\[ \mu = 5 \]</span> Use this to make a fraction</p>
+<pre><code>$$ \frac{4z^3}{16}</code></pre>
+<p><span class="math display">\[ \frac{4z^3}{\sqrt16} \]</span> These are some special characters, such as bigger or smaller as:</p>
+<pre><code>$$a \pm b$$</code></pre>
+<p><span class="math display">\[a \pm b\]</span></p>
+<pre><code>$$x \ge 15$$</code></pre>
+<p><span class="math display">\[x \ge 15\]</span></p>
+<pre><code>$$a_i \ge 0~~~\forall i$$</code></pre>
+<p><span class="math display">\[a_i \ge 0~~~\forall i\]</span> To put big brackets use right and left commands</p>
+<pre><code>$$\sum_{i=1}^{n}\left( \frac{X_i}{Y_i} \right)$$</code></pre>
+<p><span class="math display">\[\sum_{i=1}^{n}\left( \frac{X_i}{Y_i} \right)\]</span> To display Greek letters, use the backslash before the greek word</p>
+<pre><code>$$\alpha, \beta,  \gamma, \Gamma$$</code></pre>
+<p><span class="math display">\[\alpha, \beta,  \gamma, \Gamma\]</span> This is the sum symbol:</p>
+<pre><code>$$ X = \sum_{i=1}^n X_i / n  $$ </code></pre>
+<p><span class="math display">\[ X = \sum_{i=1}^n X_i  \]</span></p>
+<p>To use X bar, you will need to define it first within the equation:</p>
+<p>$$ </p>
+<pre><code>\Xbar = \sum_{i=1}^n\frac {x_i}{n}  = \frac{x_1 + x_2 + ... + x_n}{n}$$</code></pre>
+<p><span class="math display">\[ \def\Xbar{\overline{X}}
+\Xbar = ... \]</span></p>
+</div>
+<div id="general" class="section level3">
+<h3>General</h3>
+<p>Choose the first column by typing</p>
+<pre><code>[,1]</code></pre>
 </div>
 <div id="load-datasets" class="section level3">
 <h3>Load datasets</h3>
-<p>To load a dataset, you type : dataset&lt;- read.csv(‘C:/Users/admin/Desktop/R-Course by Murray/07092018/dataset.csv’, strip.white=T)</p>
+<p>To load a dataset, you type :</p>
+<pre><code>dataset&lt;- read.csv('C:/Users/admin/Desktop/R-Course by Murray/07092018/dataset.csv', strip.white=T)</code></pre>
 <p>strip.white=T means, that you exclude all spaces in your excel file to avoid complications.</p>
-<p>For import, simply run the chunk, which contains your dataset</p>
+<p>For import, simply run the chunk, which contains your dataset.</p>
 </div>
 <div id="github" class="section level3">
 <h3>Github</h3>
@@ -162,113 +260,631 @@ $(document).ready(function () {
 <div id="statistical-terms" class="section level2">
 <h2>Statistical terms</h2>
 <p><a href="https://select-statistics.co.uk/resources/glossary-page/" class="uri">https://select-statistics.co.uk/resources/glossary-page/</a></p>
-<p><strong>degrees of freedom</strong> :</p>
+<p><a href="http://www.ecologyandevolution.org/statsdocs/glossary.pdf" class="uri">http://www.ecologyandevolution.org/statsdocs/glossary.pdf</a></p>
+<p><strong>alpha</strong> : Type I error</p>
+<p><strong>asymptotic</strong> :</p>
+<p><strong>beta</strong> : Type II error <strong>beta</strong> : regression coefficient</p>
+<p><strong>CV</strong> : the coefficient of variation represents how data are spread relative to the mean of the population (mu) or sample (Xbar). SD is the standard deviation of a population (sigma) or a sample (s). It is used to compare the spread of data (quantitative) with the same units (in %) or to compare the variables between two groups with different units (unitless)!</p>
+<p><span class="math display">\[ CV = \frac{SD}{mean}\]</span></p>
+<p><strong>categorical variable vs. numeric</strong> : a variable that is a category, such as yellow, blue, brown or high and low, etc. is a categorical as well as a qualitative variable, whereas numerics can take decimal or fractional values. They are considered quantative, such as intervals or ratios.</p>
 <p><strong>Chi-Square</strong> :</p>
-<p><strong>confidence intervals</strong> :</p>
+<p><strong>confidence intervals</strong> : provides a confidence range that the true value lies in this range.</p>
+<p><strong>continuous vs. discrete</strong> : a value that is measured numerically and can have a wide and infinite range of values (1, 2, …) is continuous, whereas a discrete number has eiter one or the other outcome of a random variable, for example, head or tails.</p>
+<p><strong>degrees of freedom</strong> :</p>
+<p><strong>dependent vs. independent variable</strong> : the dependent variable y (DV) is also called the response variable. Loosely speaking, it “depends on” the independent variable. the independent x variable (IV), also called the predictor, is not depending on th dependent variable.</p>
+<p><strong>hat matrix</strong> :</p>
+<p><strong>homogeneity of variance</strong> : if the variance of … is equal across … variables</p>
+<p><strong>integer</strong> : integers cannot take decimal or fractional values, while numerics can.</p>
 <p><strong>Maximum Likelihood</strong> : gets used in generalized linear models</p>
-<p><strong>Multicolinearity</strong> : When there are linear relationships (correlations) between two or more of the potential drivers; this can lead to difficulty in the interpretation of the model coefficients. Example: a questionnaire might ask whether the staff were friendly, and also whether they were helpful, which we would expect to be highly related. There are various statistical approaches that can be used to deal with multicollienarity, including the use of principal component analysis PCA to reduce the number of potential drivers to a set of linearly uncorrelated variables.</p>
-<p><strong>OLS</strong> : Least Squares; gets used in linear models</p>
+<p><strong>multicollinearity</strong> : When there are linear relationships (correlations) between two or more of the potential drivers; this can lead to difficulty in the interpretation of the model coefficients. Example: a questionnaire might ask whether the staff were friendly, and also whether they were helpful, which we would expect to be highly related. There are various statistical approaches that can be used to deal with multicollienarity, including the use of principal component analysis PCA to reduce the number of potential drivers to a set of linearly uncorrelated variables.</p>
+<p><strong>multiple regression</strong> : a type of regression analysis that includes several independent variables.</p>
+<p><strong>NMDS</strong> : non multidimensional scale</p>
+<p><strong>non-parametric test</strong> : a statistical test that does not assume that the data follow a particular probability distribution.</p>
+<p><strong>offset</strong> : is to standardize what?</p>
+<p><strong>OLS</strong> : Ordinary Least Squares; concept gets used in linear models</p>
+<p><strong>overdispersed</strong> :</p>
+<p><strong>overfitted</strong> : in linear regression models, when the datapoints are spread like a curve, but the fitted regression line results as a vertical line, since the residuals sum up as 0.</p>
+<p><strong>overinflated</strong> :</p>
 <p><strong>PCA</strong> : principal component analysis</p>
-<p><strong>R Square</strong> :</p>
+<p><strong>r</strong> : Pearson’s correlation coefficient</p>
+<p><strong>R Square</strong> : A statistical parameter in regression analysis that measures the amount of variation in the dependent variable that is explained by variation in the independent variable. In a scatterplot, the higher the R2, the more tightly the data will be clustered around the regression line. If all values fall on the line, R2=1. The value of R2 can vary from 0 to 1.</p>
+<p><strong>standard error versus standard deviation</strong> : it is important to distinguish between the standard deviation of the data, which is a measure of variability or dispersion computed from the probability distribution function and the standard error, which provides you with certainty about the population mean as estimated from a specific sample.</p>
+<p><strong>SRS</strong> : simple random sampling</p>
+<p><strong>univariate vs bivariate vs. multivariate</strong> : univariate describe characteristics of one variable (e.g. mean and bar chart or histogram), bivariate describe characteristics of two variables (e.g. Pearson’s correlation coefficient and scatterplot) and multivariate describe characteristics of many variable (e.g. multiple correlation and multivariate regression)</p>
+</div>
+<div id="statistical-introduction" class="section level2">
+<h2>Statistical Introduction</h2>
+<div id="population" class="section level3">
+<h3>Population</h3>
+<p>A <strong>population</strong> is our subject of observation. Its mean mu is characterized by the following equation:</p>
+<p><span class="math display">\[ \mu = \sum_{i=1}^N\frac {x_i}{N}  = \frac{x_1 + x_2 + ... + x_N}{N}\]</span></p>
+<p>where</p>
+<p><span class="math inline">\(x_i\)</span> is the sum of the datapoints</p>
+<p><span class="math inline">\(i=1\)</span> from the first datapoint</p>
+<p><span class="math inline">\(N\)</span> to all datapoints</p>
+<p>The <strong>variance</strong> sigma square is the population variance, which describes the variance or distance from the mean. The following formula is used to describe a population:</p>
+<p><span class="math display">\[ \sigma^2 = \sum_{i=1}^N\frac {(x_i-\mu)^2}{N}\]</span></p>
+<p>The bigger the resulting value, the further away your datapoints are from the mean. The reason why we square within the formula is, because we aim to get a positive resulting value.</p>
+<p>For the <strong>standard deviation</strong> (SD) of a population, use the square root of the variance:</p>
+<p><span class="math display">\[ \sigma = \sqrt {\sigma^2}  \]</span></p>
+</div>
+<div id="sample" class="section level3">
+<h3>Sample</h3>
+<p>A <strong>sample</strong> is a measurement taken from a population in order to infer about the population.</p>
+<p>The sample mean is called X bar with the according following formula:</p>
+<p><span class="math display">\[ \def\Xbar{\overline{X}}
+\Xbar = \sum_{i=1}^n\frac {x_i}{n}  = \frac{x_1 + x_2 + ... + x_n}{n}\]</span></p>
+<p>where n is the number of measurements taken.</p>
+<p>The sample <strong>variance</strong> is called s square and is based on this formula:</p>
+<p><span class="math display">\[  \def\Xbar{\overline{X}}
+s^2 = \sum_{i=1}^n\frac {(x_i-\Xbar)^2}{n}\]</span> Alternatively use this formula:</p>
+<p><span class="math display">\[  \def\Xbar{\overline{X}}
+s^2 {_n-1} = \sum_{i=1}^n\frac {(x_i-\Xbar)^2}{n-1}\]</span></p>
+<p>Note the difference of n-1 in the formula, which is used to get a better estimate based on mathematical backgrounds. It is considered to be unbiased.</p>
+<p>For the <strong>standard deviation</strong> (SD) of a sample, use the square root of the variance:</p>
+<p><span class="math display">\[ s = \sqrt {s^2}  \]</span></p>
+</div>
+<div id="dependent-and-independent-variables" class="section level3">
+<h3>Dependent and Independent Variables</h3>
+<p>The <strong>dependent or response variable</strong> is the outcome of a study and described as Y, whereas the <strong>independent variable or predictor variable</strong> is influences the outcome and thus the dependent variable and described as Y. There is controversity about this however, since not in every case the causality is true and other factors might impact a correlation. THink of the fights and ice-cream example, where temperature is the co-factor leading to increase of ice cream and fights in summer instead of their direct causality.</p>
+<p>This leads to the <strong>regression equation</strong></p>
+<p><span class="math display">\[Y=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_3 + ... + e\]</span> whereas <strong>beta is the regression coefficient</strong> and e is the error</p>
+</div>
+<div id="standard-error-of-mean-sem" class="section level3">
+<h3>Standard error of mean (SEM)</h3>
+<p>The <strong>standard error</strong> of the mean is related to the standard deviation (SD). The unit of the standard error of the mean is equal to the unit of the mean. The smaller this value, the better.</p>
+<p><span class="math display">\[ SEM = \frac{SD}{\sqrt n}\]</span></p>
+</div>
+<div id="sampling-error" class="section level3">
+<h3>Sampling error</h3>
+<p>The sampling error is a <strong>natural sampling variability</strong> expressed in the following formula</p>
+<p><span class="math display">\[ \def\Xbar{\overline{X}}
+sampling error = \mu - \Xbar\]</span></p>
+</div>
+<div id="confidence-intervals" class="section level3">
+<h3>Confidence Intervals</h3>
+<p>Mean, standard deviation and variance are <strong>point estimates</strong> to approximate a population parameter. On the other hand, the confidence intervals are expressing a range of values around the mean, which are <strong>interval estimates</strong>. They are used to get an idea of the spread of data (e.g. boxplot) and represent the upper and lower confidence limits or confidence bounds for a statistic.</p>
+<p>Confidence intervals get calculated by the standard errror of the mean. The upper 95% = x+(y*z), where x is the sample mean, y the standard error and z the 0.975 quartile of the normal distribution.</p>
+<p><span class="math display">\[ CI = Estimate \pm ME \]</span> while ME stands for margin of error</p>
+<p>The <strong>confidence coefficient</strong> is calculated as (1-alpha). Thus, if alpha is 0.05, the confidence coefficient is 0.95 or 95%.Journals often require that you report 95% confidence interval for your statistics!</p>
+<p>This is the way to present your confidence intervals:</p>
+<p><span class="math display">\[ \def\Xbar{\overline{X}}
+\Xbar-ME&lt;\mu&lt;\Xbar+ME\]</span></p>
+<p>where Xbar is the sample mean, ME is the margin of error (together representing the lower limit to the left and the upper limit to the right) and mu is the population mean.</p>
+<p>More precisely expressed in numbers:</p>
+<p><span class="math display">\[95&lt;100&lt;105\]</span></p>
+<p>In this way you interpret the CI in a correct manner: 95% of CI’s for randomly selected samples will contain the population mean.</p>
+<p>Remember that CI is ANOTHER tool for estimation of a population parameter and used to compare between population parameters.</p>
+<p><strong>NOTE</strong>: Especially with small datasets, you should provide confidence intervals!</p>
+</div>
+<div id="central-limit-theorem" class="section level3">
+<h3>Central Limit Theorem</h3>
+<p>The Central Limit Theorem states that the sample distribution approximates a normal distribution, even if the distribution of the population is not normally distributed, if the sample size is sufficiently large.</p>
+</div>
 </div>
 <div id="libraries" class="section level2">
 <h2>Libraries</h2>
-<p>To install libraries in R type: install.packages(“name_of_library”)</p>
-<p>To load libraries in R Studio type: library(name_of_library)</p>
-<p><strong>library(car)</strong> : for regressions</p>
-<p><strong>library(emmeans)</strong> : for the function emmeans</p>
-<p><strong>library(glmTBB)</strong> : to fit laPlace</p>
-<p><strong>library(lme4)</strong> : to fit lme and lmer</p>
-<p><strong>library(MuMIn)</strong> : to compare AIC’s</p>
-<p><strong>library(rstanarm)</strong> : for Bayesian models</p>
-<p><strong>library(tidyverse)</strong> : contains main functions, such as NOTE: Always load the the end to avoid masking of standard functions</p>
-<p><strong>library(vegan)</strong> : for PCA’s</p>
+<p>To <strong>install</strong> libraries in R type: install.packages(“name_of_library”). To avoid R Studio to malfuntion when using libraries, better install libraries in R as an admin. Thus, when opening the program, right click and choose “run as an admin”.</p>
+<p>To <strong>load</strong> libraries in R Studio type: library(name_of_library)</p>
+<pre><code>library(broom)      : to use augment()
+library(car)        : for regressions; to use scatterplotMatrix()
+library(dplyr)      : NOTE: This library is implemented in tidyverse; contains main functions for data wranging
+library(emmeans)    : for the function emmeans
+library(effects)    : to use plot(alleffects)
+library(glmTBB)     : to fit laPlace
+library(ggfortify)  : to fit plots with autoplot()
+library(ggplot2)    : to graph customised plots
+library(INLA)       : used for Bayesian models to ? ; get it from here: install.packages(&quot;INLA&quot;, repos=c(getOption(&quot;repos&quot;),
+                      INLA=&quot;https://inla.r-inla-download.org/R/stable&quot;),dep=TRUE) and cancel chossing a cran, because it doesn't exist
+library(knitr)      : includes funtion kable()
+library(lme4)       : to fit lme and lmer
+library(MASS)       : to fit glm
+library(MuMIn)      : to create and compare AIC's
+library(rstanarm)   : for Bayesian models
+library(tidybayes)  : for Bayesian models
+library(tidyverse)  : contains the libraries dplyr and tidyr and thus the main functions used to plot and
+                      manipulate your datasets; NOTE: Always load the the end to avoid masking of standard
+                      functions
+library(vegan)      : for PCA's</code></pre>
+<p>AICc function either in MASS or knitr</p>
 </div>
 <div id="functions" class="section level2">
 <h2>Functions</h2>
-<p><strong>abline(data.model)</strong> : to fit a regression line through your model</p>
+<div id="check-on-dataset" class="section level3">
+<h3>Check on Dataset</h3>
+<pre><code>head()      - displays the first 6 rows of your dataset</code></pre>
+<pre class="r"><code>head(pressure)</code></pre>
+<pre><code>##   temperature pressure
+## 1           0   0.0002
+## 2          20   0.0012
+## 3          40   0.0060
+## 4          60   0.0300
+## 5          80   0.0900
+## 6         100   0.2700</code></pre>
+<pre><code>summary()   - shows a summary for datasets or models</code></pre>
+<pre class="r"><code>summary(pressure)</code></pre>
+<pre><code>##   temperature     pressure       
+##  Min.   :  0   Min.   :  0.0002  
+##  1st Qu.: 90   1st Qu.:  0.1800  
+##  Median :180   Median :  8.8000  
+##  Mean   :180   Mean   :124.3367  
+##  3rd Qu.:270   3rd Qu.:126.5000  
+##  Max.   :360   Max.   :806.0000</code></pre>
+<pre><code>str(pressure) - gives you an idea of the main structure of your dataset.</code></pre>
+<pre class="r"><code>str(pressure)</code></pre>
+<pre><code>## 'data.frame':    19 obs. of  2 variables:
+##  $ temperature: num  0 20 40 60 80 100 120 140 160 180 ...
+##  $ pressure   : num  0.0002 0.0012 0.006 0.03 0.09 0.27 0.75 1.85 4.2 8.8 ...</code></pre>
+</div>
 <div id="data-wrangling" class="section level3">
 <h3>Data wrangling</h3>
-<p><strong>mutate</strong> :</p>
-<p><strong>head(data)</strong> : displays the first 6 rows of your dataset</p>
+<pre><code>filter()    - filter out rows
+arrange()   - sort data
+select()    - select columns
+mutate()    - create new columns
+summarize() - perform stats
+group_by()  - create groups</code></pre>
 </div>
-<div id="something-else" class="section level3">
-<h3>something else</h3>
+<div id="outputs" class="section level3">
+<h3>Outputs</h3>
+<pre><code>kable()     - creates a table of your data</code></pre>
+</div>
+<div id="bayesian" class="section level3">
+<h3>Bayesian</h3>
+<pre><code>tidyMCMC(fert.rstanarm$stanfit,conf.int=TRUE, conf.method='HPDinterval', rhat=TRUE, ess=TRUE) - get confidence intervals</code></pre>
+</div>
+<div id="plots" class="section level3">
+<h3>Plots</h3>
+<pre><code>abline(data.model)    - fits a regression line through your plot
+par()                 - is used to display many graphs in one window; most common function par(mfrows(1,3))
+theme(classic)        - eliminates the background of the graph, so it appears entirely white.</code></pre>
 </div>
 </div>
-<div id="plots" class="section level2">
-<h2>Plots</h2>
-<p><strong>plot</strong></p>
-<p><strong>ggplot</strong></p>
-<p><strong>homogeneity</strong> :</p>
-<p>The <strong>box plot</strong> (a.k.a. box and whisker diagram) is a standardized way of displaying the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum</p>
-<p><strong>scatterplot</strong></p>
+<div id="experimental-design" class="section level2">
+<h2>Experimental design</h2>
+<p>What to consider (sample size and rule of thumb to be larger than 30)</p>
+<div id="hypothesis-testing" class="section level3">
+<h3>Hypothesis testing</h3>
+<pre><code>1. Develop a research hypothesis that can be tested mathematically.
+2. Formally state the null and alternative hypothesis.
+3. Decide on an appropriate statistical test and do the calculations (dummy data for testing analysis)
+4. Make your decision based on the results.</code></pre>
+<p><strong>Null hypothesis</strong></p>
+<ol style="list-style-type: decimal">
+<li>single-tailed: For example, a drug is less effective than or equal to the standard treatment.</li>
+</ol>
+<p><span class="math display">\[(1) H_0: \mu_1 ≤ \mu_2\]</span> (2) two-tailed: For example, a drug has an effect over the standard treatment.</p>
+<p><span class="math display">\[(2) H_0: \mu_1 = \mu_2\]</span></p>
+<p><strong>Alternative hypothesis</strong></p>
+<ol style="list-style-type: decimal">
+<li>single-tailed: For example, a drug is more effective than the standard treatment.</li>
+</ol>
+<p><span class="math display">\[(1)H_1: \mu_1 &gt; \mu_2\]</span> (2) two-tailed: For example, a drug is has no effect over the standard treatment.</p>
+<p><span class="math display">\[(2)H_1: \mu_1 not = \mu_2\]</span></p>
+<p><strong>Note</strong>: The null hypothesis and the alternative hypothesis need to be mutually exclusive!</p>
+<p>A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis, so you reject the null hypothesis. A large p-value (&gt; 0.05) indicates weak evidence against the null hypothesis, so you fail to reject the null hypothesis.</p>
+<p>Hence:</p>
+<pre><code>p ≤ 0.05 :  reject H0
+p &gt; 0.05 :  accept H0</code></pre>
+<p><strong>Type I error</strong> (alpha): Reject H0, when it is true</p>
+<p><strong>Type II error</strong> (beta): Accept H0, when it is not true (and HA is true)</p>
 </div>
-<div id="which-model-to-choose" class="section level2">
-<h2>Which model to choose?</h2>
+</div>
+<div id="data-management" class="section level2">
+<h2>Data Management</h2>
+<p>Prior to starting any analysis, check on the following things:</p>
+<pre><code>- Are there any missing data or duplicates?
+- Is there any back-up (e.g. Github)?
+- Does the dataset has outliers (trimmed mean)?
+- Arrange the rows and columns in Excel accordingly for further analysis in R as an CSV-file (comma separated values)
+- How were dates entered into Excel sheet? Often problems arise with dates entered.
+- Is the labeling of the variables correct?
+- Are the values for the variables reasonable?</code></pre>
+</div>
+<div id="descriptive-statistics" class="section level2">
+<h2>Descriptive Statistics</h2>
+<p>For <strong>categorical data</strong> the appropriate graphs are:</p>
+<pre><code>- barcharts
+- pie charts
+- frequency tables
+- Pareto</code></pre>
+<p>For <strong>continuous data</strong> the appropriate graphs are:</p>
+<pre><code>- boxplots
+- histograms
+- scatterplots
+- linegraphs</code></pre>
+<div id="barplot" class="section level3">
+<h3>Barplot</h3>
+<pre><code>barplot()</code></pre>
+<pre class="r"><code>#barplot()</code></pre>
+</div>
+<div id="boxplot" class="section level3">
+<h3>Boxplot</h3>
+<p>The <strong>box plot</strong> (a.k.a. box and whisker diagram) is a standardized way of displaying the distribution of data based on the five number summary: minimum value of the response variable, first quartile, median and interquartile range, third quartile, and maximum value of the response variable. It is used to evaluate homogeneity. Furthermore, you can detect central tendency, range of data, symmetry and outliers.</p>
+<p>The according function is called boxplot(). Put your dataset into the brackets.</p>
+<pre class="r"><code>boxplot(pressure)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+</div>
+<div id="histogram" class="section level3">
+<h3>Histogram</h3>
+<p>The <strong>histogram</strong> of the residuals can be used to check whether the variance is normally distributed. A symmetric bell-shaped histogram which is evenly distributed around zero indicates that the normality assumption is likely to be true. A rule of thumb for the bin width is the square root of the data points, but it shouldn’t be &lt;6.</p>
+<p>The according function is called hist(). Put your predictors (IV’s) or the residuals? into the brackets.</p>
+<pre class="r"><code>hist(pressure$temperature)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+</div>
+<div id="scatterplot" class="section level3">
+<h3>Scatterplot</h3>
+<p>A <strong>scatterplot</strong> is investigating the relationship between two variables in a linear model, while they are influenced by outliers..</p>
+<p>The according function is called scatterplot(). Put data points? into the brackets. Response variable on the y-axis and the predictor on the x-axis.</p>
+</div>
+<div id="linegraphs" class="section level3">
+<h3>Linegraphs</h3>
+<p>Choose the appropriate range of y-axis, so that it “frames” your data points, i.e. don’t use a larger scale than necessary. This will skew your data and the underlying pattern.</p>
+<p>For fast and <strong>standard plots</strong> you can use the following function:</p>
+<pre><code>plot()</code></pre>
+<pre class="r"><code>plot(pressure)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<p>To create more complex and <strong>customized plots</strong> you can make use of</p>
+<pre><code>ggplot()</code></pre>
+<pre class="r"><code>ggplot(data=pressure, map=aes(y=pressure, x=temperature)) +
+  geom_point() +
+  geom_line() +
+  theme_classic()</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<p>For more details on graphing with ggplot, check on Grammar of Graphics by Murray Logan’s R-course.</p>
+</div>
+<div id="heat-map" class="section level3">
+<h3>Heat Map</h3>
+</div>
+</div>
+<div id="which-model-to-fit-and-how" class="section level2">
+<h2>Which model to fit and how?</h2>
 <p><a href="https://help.xlstat.com/customer/en/portal/articles/2062461-which-statistical-model-should-you-choose-?b_id=9283" class="uri">https://help.xlstat.com/customer/en/portal/articles/2062461-which-statistical-model-should-you-choose-?b_id=9283</a></p>
 <p><a href="http://www.dataanalytics.org.uk/Data%20Analysis/Statistics/choosing-your-stats-test.htm">http://www.dataanalytics.org.uk/Data%20Analysis/Statistics/choosing-your-stats-test.htm</a></p>
-<ol style="list-style-type: decimal">
-<li>Fit the model</li>
-</ol>
+<div id="fit-the-model" class="section level3">
+<h3>(1) Fit the model</h3>
 <p>Fitting a model to data means choosing the statistical model that predicts values as close as possible to the ones observed in your population.</p>
 <p>There are many keys to decide which distribution and model to fit. Start up with the following questions:</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>Is the data normally distributed? If yes, fit a lm. If not, normalize by log or other transformations.</p></li>
-<li><p>Which and how many dependent and independent variables does the experiment contain?</p></li>
-<li><p>Does your experiment have random and/or fixed effects? If so, use mixed effects models.</p></li>
-<li><p>Do you prefer to use a Bayesian model?</p></li>
-</ol>
-<ol start="2" style="list-style-type: decimal">
-<li>Validate the model</li>
-</ol>
+<p><a href="https://kevintshoemaker.github.io/NRES-746/GAMs.html" class="uri">https://kevintshoemaker.github.io/NRES-746/GAMs.html</a></p>
+<pre><code>(a) What is the experimental design? Which and how many dependent and independent variables does the experiment contain? Does your experiment have random and/or fixed effects? If so, use mixed effects models.
+
+(b) Is the response normally distributed?</code></pre>
+<p>Test this with a <strong>Normal Q-Q- Plot</strong>, which is implemented in the autoplot function.</p>
+<p>If your data is normally distributed and follows the other assumption, fit a lm. If not, try to normalize by log or other transformations.</p>
+<p>If you have a bimodal distribution, try non-parametric techniques. Measures of central tendency like mean, median, etc. are useless in this case.</p>
+<pre><code>(c) Do(es) your predictor(s) has/have a linear relationship to your response?</code></pre>
+<p>Predictors and response variables must have linear relationship; hence linear regressions are sensitive to outliers and data inaccuracy. This can be tested with scatterplots.</p>
+<pre><code>(d) Is there multicollinearity?</code></pre>
+<p>Tested with tolerance measures: T = 1 - R^2 (T &lt; 0.1 indicates multicollinearity) or Variance inflation factor: VIF = 1/T (VIF &gt;100 indicates multicollinearity)</p>
+<pre><code>(e) Do you prefer to use a Bayesian model?</code></pre>
+</div>
+<div id="validate-the-model" class="section level3">
+<h3>(2) Validate the model</h3>
 <p>There are different methods that you can use to do so. The best approach is to cross-validate and choose the model with the highest R² , which measures how much of the total variability in your data is accounted for by the model. However, as it is global measure of fit, a high R² doesn’t guarantee a valid model. Therefore, the main tool used is the Residual Analysis, which gives a more immediate and clear illustration of the relationship between the model and the data used. While doing a statistial analysis, it’s very important to make sure about the Godness of Fit of the model used.</p>
 <p>In a nutshell, validation is looking at the residuals vs. standardized residuals, Cook’s distance, etc. If you deny the model, because these values don’t look good, check for the lack of fit, which is a comparison to a chi square. The value that should be greater than 0.5.</p>
 </div>
-<div id="gaussian-model" class="section level2">
-<h2>Gaussian Model</h2>
-<p>Assumptions: - normal distributed data</p>
 </div>
-<div id="poisson-model" class="section level2">
-<h2>Poisson Model</h2>
-<p>Assumptions:</p>
-<p>If the plot shows that there is a relationship between the mean and the variance, which you can see by the high noise near the low values and the rare dots at high values (called wedge), you cannot use models assuming a normal distribution, because it is a massive violation of linear regression.</p>
-<p>Often non-normality and unequal variance are linked: if we fix one, we can fix the other. So we can log transform our data to make the dataset having a normal distribution. Log transformation is possible if there are no zeros, we can check by the function summary and check for the lowest value</p>
+<div id="normal-distribution" class="section level2">
+<h2>Normal Distribution</h2>
+<div id="description" class="section level3">
+<h3>Description:</h3>
+<p>Normal distributions are described by the mean (<span class="math inline">\(\mu/Xbar\)</span>) and the variance (<span class="math inline">\(\sigma^2/s^2\)</span>).</p>
 </div>
-<div id="binomial-model" class="section level2">
-<h2>Binomial model</h2>
+<div id="assumptions" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- normally distributed data
+- symmetry
+- unimodality
+- continuous range from negative infinity to positive infinity
+- total area under the curve is 1 or 100%.
+- common value for the mean, median and mode</code></pre>
+<p>The normal distribution with a mean of 0 and a standard deviation of 1 is known as the standard normal distribution or z distribution. Any normal distribution can be transformed to the standard normal distribution by converting the original values to standardized scores or z-scores (see below), which facilitates comparison among population with different means and variances.</p>
+<p>If the mode is greater than the mean, the distribution is considered negatively skewed. Graphically the top of the bell curve shifts to the right. If the mode is smaller than the mean, it is positively skewed. In this case the bell curve shifts to the left opposite to what is expected.</p>
+<p>The 68 95 99 rule:</p>
+<pre><code>- about 68% will fall within 1 standard deviation of the mean (rare, but still common)
+- about 95% will fall within 2 standard deviation of the mean (unusual)
+- about 99% will fall within 3 standard deviation of the mean (quite unusual)</code></pre>
+<p>Insert graph</p>
+</div>
+<div id="data-transformation" class="section level3">
+<h3>Data Transformation</h3>
+<p>First, evaluate, if data transformation is appropriate. (1) Graph the data with a histogram, which also helps to identify outliers. Right-skewed data sets display high frequencies to the left, whereas left-skewed on the other hand show most data values on the right side of the graph. (2) Compute statistical test, such as the Anderson-Darling test or the Kolmogorov-Smirnoff test. If the P value is less than 0.05, your data is not normally distributed. You can also use the Shapiro-Wilk test to test if your distribution is normal.</p>
+<p>If you confront data, which is <strong>not normally distributed</strong>, you can <strong>tranform your data</strong> in different ways in order to get normally distributed data. (1) One way is the most common log-transformation. (2) Another, but less popular method is the square-root transformation. It is often difficult to interpret the results, since back-transformation is sometimes not possible. (3) You can also reflect the data. For this, you first detect your highest value and add 1 to it. In the following subtract each of the other values from that value. If you reflect a variable, this inverses the values, so that the highest score is now the lowest, which also inverses the interpretation of the results!</p>
+<p>NOTE: If you tranform your data, remember that the unit will be transformed as well!</p>
+</div>
+<div id="t-test" class="section level3">
+<h3>t-test</h3>
+</div>
+<div id="assumptions-1" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- samples are unrelated / independent (tested by correlation coefficient)
+-&gt; if samples are related use a paired t-test
+- influenced by outliers (detected by boxplot or normal Q-Q; remove only when they are 2+ standard deviations from the mean)
+- population variances of two groups are equal (tested by)
+-&gt; if variances are unequal use Welch-Satterthwaite test)</code></pre>
+<p>T tests using AT test allows you to test whether the mean of a sample differs significantly from an expected value or whether the means of 2 groups different significantly from each other. significance here means statistical significance and is related to the probability of committing a type one error. If you have one mean to test it is called a <strong>One-Sample t-test</strong> if you compare 2 different means it is called <strong>Two-Sample t-test</strong>. A type II error alpha is when you decide to reject the null hypothesis even though it is true. When the P value is less than 0.05 U reject the null hypothesis which supports your hypothesis. the t test is good for a sample size of less than 30. A T test Calculates the chance to commit a type one error. It depends on the degrees of freedom. There are tables that provides critical T values to make inferences about your hypothesis. The T test is mathematically equivalent to the analysis of variance ANova. The T distribution approximates a normal distribution Because if the number of sample increases (the sample size), the distribution becomes normal. It corresponds to the degrees of freedom. The T value T 0.05, 20 = 1.725 means that there is 0.05 significance level or P value, the degrees of freedom is 20 and the result is the critical T value taken from statistical tables.</p>
+<p>One assumption is the homogeneity of variance between 2 samples. The population distribution of 2 populations should be equal. They should be normal.</p>
+<p>The Two-Sample t-test is also known as the independent samples T test because the 2 samples are not related to each other. So this is a between subjects design. One assumption of this test is that both distributions must be normal and the population variances must be equal or homogeneous. In contrast to this we have the repeated measures T test also known as the dependent samples T test it is a within subjects design and it means that the the 2 samples are related to each others for example a treatment effect acts as its own control.</p>
+<p>To test if the variances of the samples are equal, you can use the Levene’s test, the Brown and Forsythe test or Bartlett’s test for 2 independent samples. If you do not have normality you should use non-parametric tests in contrast to parametric tests.</p>
+<p>Insert t valu formula. If the T value is outside of the range The null hypothesis will be accepted, which means the null hypothesis Can be rejected if the T value is within the range. So if it’s outside this range you can not reject the null hypothesis.</p>
+<p>Unequal variance t test If the Variance of your t test is unequal you can use the unequal variance test Or <strong>Welsh test</strong>. It should be used when the variance is unknown or and the sample size is small However the calculation of degrees of freedom is more complicated.</p>
+</div>
+<div id="correlation-coefficient" class="section level3">
+<h3>Correlation Coefficient</h3>
+<p>The correlation coefficient is testing, if two variables are correlated, and to quantify the degree of association between them.</p>
+<ol style="list-style-type: decimal">
+<li>Pearson’s correlation coefficient r - with both variables measured on an interval or ratio scale</li>
+</ol>
+<p>r is an estimate of the population parameter rho(<span class="math inline">\(\rho\)</span>). If <span class="math inline">\(\rho\)</span> = 0 for two variables, the two variables are said to be independent.</p>
+<p>This is the formaula:</p>
+<p><span class="math display">\[r = \frac{\sum_{i=1}^n\frac {(x_i-\xbar)}{s_x}\frac {(y_i-\ybar)}{s_y}}{n-1}\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Spearman rank-order coefficient - with both variables measured on ordinal scales</p></li>
+<li><p>Point-biserial correlation coefficient - with one variable measured on a nominal/dichotomous scale and the other one on an interval or ratio scale</p></li>
+<li><p>phi - with both variables measured on a nominal/dichotomous scale</p></li>
+</ol>
+</div>
+<div id="effect-of-size-and-power" class="section level3">
+<h3>Effect of size and power</h3>
+<p>The effect of size and power should be calculated before the experiment. The effective size delta gets calculated by the mean of one sample minus the mean of the other sample divided by the sd. Large differences are easier to measured than small differences when the standard deviation and N are equal. For the statistical power you should choose beta. Beta is the probability of committing a type two error, so powers is defined as 1 minus beta.</p>
+<p><span class="math display">\[ \delta = \frac{\mu_1 - \mu_2}{\sigma}\]</span> whereas mu1 is the mean of one sample and mu2 is the mean of an expected sample; and sigma is the standard deviation. The resulting effect size together with alpha=type 1 error (usually 0.05) with the aim to achieve power of 0.9 (i.e. where beta=type 2 error is 0.1, because power is defined as 1-beta), results in n by this calculation:</p>
+<p><span class="math display">\[ n = \frac{2(Z_\alpha/2 + Z_\beta)^2}{\delta^2}\]</span></p>
+<p>where delta is the effect size and Z alpha over 2 is the Z-score for alpha (usually 1.96, if you aim to have a confidence interval of 95% and thus your alpha is 0.025, because the area under the curve to the left ADDED to the one on the right is 0.05) and Z beta is the power, which is 1-beta (usually you aim for 90% power, so that beta is 0.01, which results in a Z-score of 1.28).</p>
+<p>To know how to get the z-score, check z-distribution</p>
+</div>
+<div id="z-score-and-distribution" class="section level3">
+<h3>z-score and distribution</h3>
+<p>Computing data points into z-scores, helps to judge whether your values are typical or atypical, i.e. how far the value is from the mean (usually more than 3 standard deviation is a rare value) and thus normalized your values, since they give you a unitless value.</p>
+<p>The formula for calculating z-scores is the following:</p>
+<p><span class="math display">\[Z=\frac{x-\mu}{\sigma}\]</span> where x is the mean, mu the mean of and sigma the standard deviation.</p>
+<p>The formula in R is pnorm(-1.333=0.0912)</p>
+<p>Read the z-score from z-score-tables:</p>
+<ol style="list-style-type: decimal">
+<li>Open the z-score table online: <a href="http://www.z-table.com/" class="uri">http://www.z-table.com/</a></li>
+<li>Check in the according table (left or right of the curve), for the closest value that you are aiming for and read the z-score to the left column and the top row.</li>
+<li>Include this value in the formula for effect size to compute the sample size minimum for statistical significance.</li>
+</ol>
+</div>
+</div>
+<div id="poisson-distribution" class="section level2">
+<h2>Poisson Distribution</h2>
+<div id="description-1" class="section level3">
+<h3>Description:</h3>
+<p>A poisson distribution is used when you have full counts, i.e. integers only, no point values (0.45, 5.67, etc…). Thus, we have a discrete distribution over a specified interval.</p>
+<p>[add notes from lecture]</p>
+</div>
+<div id="assumptions-2" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+</div>
+</div>
+<div id="binomial-distribution" class="section level2">
+<h2>Binomial Distribution</h2>
+<div id="description-2" class="section level3">
+<h3>Description:</h3>
+<p>A binomial distribution is used for dichotomous outcomes, which means the outcome can <strong>only take two possible values</strong>), for instance when you have presence or absence data. Therefore, it can only take values with full counts, i.e. integers only, no point values (0.45, 5.67, etc…). Thus, we have a discrete distribution over a specified interval, which is influences by the probability of a positive outcome p and the sample size n. Rule of thumb: If n*p and n(1-p) &gt;5, the binomial distribution resembles the normal distribution.</p>
+</div>
+<div id="assumptions-3" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- two outcomes possible only
+- each trial is independent, so the result of one does not influence following outcomes
+- probability is thus constant for every trial
+- fixes number of trials (n)</code></pre>
+<p>This is the way to compute in R:</p>
+</div>
 </div>
 <div id="negative-binomial" class="section level2">
 <h2>Negative Binomial</h2>
+<div id="description-3" class="section level3">
+<h3>Description:</h3>
+<p>A negative binomial distribution is used, when you have counts, excessive zeros, big samples sizes or overdispersion in a poisson distribution.</p>
+</div>
+<div id="assumptions-4" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+</div>
 </div>
 <div id="beta" class="section level2">
 <h2>Beta</h2>
+<div id="description-4" class="section level3">
+<h3>Description:</h3>
+<p>A beta model is used when your data is between 0 and 1, but not 0 or 1.</p>
+</div>
+<div id="assumptions-5" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+</div>
 </div>
 <div id="beta-zero-inflated" class="section level2">
 <h2>Beta zero inflated</h2>
+<div id="description-5" class="section level3">
+<h3>Description:</h3>
+</div>
+<div id="assumptions-6" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+</div>
 </div>
 <div id="gamma" class="section level2">
 <h2>Gamma</h2>
+<div id="description-6" class="section level3">
+<h3>Description:</h3>
+<p>A gamma distribution is used when you have data more than 0 to infinite.</p>
+</div>
+<div id="assumptions-7" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- all observation are independent, which means a person cannot be measured twice.
+- the categories are exclusive so they cannot appear twice. They have to be distinguishable from the other categories.
+- no cell has an expected value less than one and no more than 20% of the expect values than 5. That means it is not valid for spares data, in which one or more cells have a low expected frequency.</code></pre>
+<p>If you cannot meet this assumptions, you can use the Fisher’s exact test or the Yates correction for continuity, of which the latter is not endorsed (empfohlen).</p>
+</div>
+<div id="the-chi-square-distribution" class="section level3">
+<h3>The Chi square distribution</h3>
+<p>The <strong>Chi square distribution</strong> is a special case of the gamma distribution and has only one parameter K which specifies the degrees of freedom. This distribution has only positive values because it’s based on the sum of squared quantities and that’s why it’s right skewed. If k approaches infinity, the chi square distribution becomes very similar to a normal distribution. There are tables of critical values for the Chi square distribution. Any test results above this critical value will be considered significant for a chi square test of independence. You must know that degrees of freedom to evaluate a Chi square value. The critical value increases with the numbers of degrees of freedom</p>
+</div>
+<div id="the-chi-square-test" class="section level3">
+<h3>The Chi square test</h3>
+<p>The Chi square test is one of the most common ways to examine relationships between 2 or more categorical variables. There are several types of Chi square tests. The most common is the Pearson Chi square test. There are actually 3 ways of using the Chi square test. The 1st is Chi square test for independence, the 2nd is the Chi square test for equality of proportions and the 3rd is the chi square test of goodness of fit.</p>
+<p>asymptotic</p>
+<ol style="list-style-type: decimal">
+<li><p>The <strong>Chi square test for independence</strong> has the null hypothesis that the variables are independent of each other is that there is no relationship between them. In general the Chi square test relies on the difference between observed and expected values. The observed values is simply what you found or observed in the sample data set while the expected values are what you would have expected to find if the 2 variables were independent. We need to know if the values represents a significant result. The chi square test is based on the square difference between these observed and expected values in each cell using a certain formula. We would consult a chi square table to see if the Chi squared value calculate from our data exceeds the critical value for the relevant distribution. When doing an analysis on the computer, the chi square value, it’s degrees of freedom and the P value are provided. If the P value is less than 0.05 we would normally reject the null hypothesis and conclude that the variables we studied are not.</p></li>
+<li><p>The <strong>Chi square test for equality of proportions</strong> is computed exactly the same way as the Chi square test for independence but the hypothesis is stated differently. The hypothesis is that the distribution of some variable is the same in all populations. So we test from multiple independent populations. For example we could test for different ethnic group. Whether the rate of a disease is the same or different across different populations.</p></li>
+<li><p>The <strong>Chi square test of goodness of fit</strong> is used to test the hypothesis that the distribution of a categorical valuable within a population follows a specific pattern of proportions while the alternative hypothesis is that the distribution of the variable follow some other patterns. For example, if we believe that a particular population has a certain percentage of blood pressure (40% normal 30% hypertension 20% pre hypertension), we can test this by drawing the sample and comparing it to the observed proportions with our hypothesis (the expected values). When we think of the degrees of freedom for the chi square goodness of fit test, they are one less than the number of groups. So if we have 3 groups of blood pressure, the degrees of freedoms are 3 - 1 so it is 2 . The result is a computed Chi square value. If it’s higher than the critical value, it is highly significant and we reject the null hypothesis.</p></li>
+</ol>
+<p>McNemar’s Test for Matched Pairs</p>
+<p>Used with data from paired samples.</p>
+<p>Page 199 Correlation statistics for categorical data</p>
+<p>Binary variables</p>
+<p>Phi is a measure of the degree of association between 2 binary variables such as two categorical variables. Phi is the same as r (the Pearson’s correlation) when variables are scored as 0 and 1. The tetrachoric correlation coefficient gets used, if two binary variables are thought to represent underlying continuous measurement scales. For instance if test scores on a scale of 0 to 100 are dichotomized for analytical purposes as pass or fail.</p>
+<p>Ordinal variables</p>
+<p>For ordinal variables You can use the Spearman’s rank order coefficient. It gets favoured over Phi correlation to lessen the influence of outliers. The goodman and Kruskals gamma is also used for ordinal variables by calculating the number of Concordant and and discordant pairs among 2 variables. Two variables can have a positive relationship. A concordant pair is when case 2 has a higher value on the 1st variable than case one. so you would expect that case 2 also has a higher variable value on the 2nd variable. A discordant pair is when unexpectedly case 2 had a lower value on the 2nd variable.</p>
+<p>Insert Picture of Gamma measurements</p>
+<p>You have 2 ordinal variables And 3 ordinal variables …. For example BMI Normal and overweight And blood pressure Normal, prehypertensive And hypertensive. Each cell Gets designated with Letters A B C D E F and used for calculations.</p>
+<p>Gamma is a symmetrical measure, because it doesn’t matter which variable is considered the predictor and which the outcome. There are some alternatives to the gamma measurements: 1. Kendall’s tau-a is based on the number of concordant and disconcordant pairs divided by a measure based on the total number of pairs. 2. Kendall’s tau-b is a similar measure based on concordant and disconcordant pairs adjusted for the number of ties and ranks. 3. Kendall’s tau-c is used for non square tables and has a known sampling distribution. 4. Somers’s d is an asymmetrical version of gamma. So the calculation of the statistic varies depending on which my readers consider the predictor and which the outcome.</p>
+<p>When you have a chi square distribution and want to calculate the degrees of freedom the formulas is r-1 multiplied with C -1 which is the number of rows -1 times the number of columns -1. For example a 2 x 2 table has 1ﾟ degree of freedom because you have two rows -1 multiplied with 2 columns -1 so you end up with 1 multiplied with 1. For a 3 x 5 table the degrees of freedom are 8 because you have 3 rows -1 multiplied with 5 rows -1 which is 2 multiplied with 4 or 8.</p>
+<p>Null hypothesis for Chi square test is no relationship between variables and thus independent. If chi square value exceeds the critical value, which is based on df, we reject null hypothesis that variables are independent. Hence, the variables are related. If P value &lt; 0.05, reject null hypothesis.</p>
+</div>
+</div>
+<div id="glm" class="section level2">
+<h2>GLM</h2>
+<div id="linear-model" class="section level3">
+<h3><strong>Linear Model</strong></h3>
+</div>
+<div id="description-7" class="section level3">
+<h3>Description:</h3>
+<p>Linear Regression Analysis</p>
+</div>
+<div id="assumptions-8" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- normality
+- something else</code></pre>
+<ol style="list-style-type: decimal">
+<li>Descriptive Statistic:</li>
+</ol>
+<p>A graphic analysis can be computed by a <strong>scatterplot</strong> investigating the relationship between two variables.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Inferential Statistic</li>
+</ol>
+<p>For statistical support of your statement, you can calculate the <strong>R2</strong> of your two variables to show the strength of the correlation between your two variables.</p>
+</div>
 </div>
 <div id="anova" class="section level2">
 <h2>ANOVA</h2>
+<div id="description-8" class="section level3">
+<h3>Description:</h3>
+<p>Anova is used to test the statistical difference between two groups</p>
+</div>
+<div id="assumptions-9" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- Normality
+- Independence
+- Equality of variances (compute a boxplot to check on variance; there should be no relation between mean and variance, such as the variance increases with a higher mean; and Levene's or Bartlett's test)</code></pre>
+<p>If normality is not met and the sample sizes between two groups are inequal, compute a non-parametric test, such as the <strong>Kruskall-Wallis</strong> test. If all assumptions are met, but the sample size is unequal only, compute a <strong>Tukey-Kramer</strong> adjustment.</p>
+</div>
+</div>
+<div id="manova" class="section level2">
+<h2>MANOVA</h2>
+<div id="assumptions-10" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- Normality
+- Independence
+- Equality of variances (compute a boxplot to check on variance; there should be no relation between mean and variance, such as the variance increases with a higher mean; and Levene's or Bartlett's test)
+- equality of variance-covariance (tested bythe Box-test)</code></pre>
+<p>If r&gt;0.8, consider a PCA, where multicolinearity arises.</p>
+<p>Remove outliers, if they are greater than 2 standard deviations from the mean.</p>
+</div>
 </div>
 <div id="ancova" class="section level2">
 <h2>ANCOVA</h2>
-<p>Assumptions:</p>
-<ul>
-<li>linearity of regression</li>
-<li>homogeneity of error variances</li>
-<li>independence of error terms</li>
-<li>normality of error terms</li>
-<li>homogeneity of error slopes</li>
-</ul>
+<div id="description-9" class="section level3">
+<h3>Description:</h3>
+</div>
+<div id="assumptions-11" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- linearity of regression
+- homogeneity of error variances
+- independence of error terms
+- normality of error terms
+- homogeneity of error slopes</code></pre>
+</div>
+</div>
+<div id="glmm" class="section level2">
+<h2>GLMM</h2>
+<div id="description-10" class="section level3">
+<h3>Description:</h3>
+<p>Generalized linear mixed effects models (pres. 11.2a)</p>
+<p>glmer</p>
+<p>glmmTBB : LaPlace newer approach in the package glmTBB</p>
+</div>
+<div id="assumptions-12" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+<p>Additional assumptions:</p>
+<pre><code>- dispersion
+- (multi)collinearity
+- design balance and Type III (marginal) SS
+- heteroscadacity
+- spatial/temporal autocorrelation</code></pre>
+</div>
+</div>
+<div id="gam" class="section level2">
+<h2>GAM</h2>
+<div id="description-11" class="section level3">
+<h3>Description:</h3>
+<p>A generalized additive model (GAM) is a generalized linear model in which the linear predictor depends linearly on unknown smooth functions of some predictor variables. GAM can handle non-linear, linear and non-monotonic relationships between response and predictor variables.</p>
+</div>
+<div id="assumptions-13" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+</div>
+</div>
+<div id="mcmc" class="section level2">
+<h2>MCMC</h2>
+<div id="description-12" class="section level3">
+<h3>Description:</h3>
+<p>Markov Chain Monte Carlo</p>
+</div>
+<div id="assumptions-14" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+</div>
+</div>
+<div id="nmds-pca" class="section level2">
+<h2>NMDS = PCA?</h2>
+<div id="description-13" class="section level3">
+<h3>Description:</h3>
+<p>Non-metric multidimensional scaling (NMDS) is an indirect gradient analysis approach which produces an ordination based on a distance or dissimilarity matrix. It’s a rank-based approach.</p>
+<p><a href="https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/" class="uri">https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/</a></p>
+</div>
+<div id="assumptions-15" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+</div>
+</div>
+<div id="non-parametric-tests" class="section level2">
+<h2>Non-parametric tests</h2>
+<p>You can use non-parametric analysis tests as an alternative to parametrics, if you don’t meet the assumption of a normally distributed sample after data transformation. However, these are less powerful, but often have fewer or no assumptions about the data distribution.</p>
+<p>The <strong>Mann-Whitney U test</strong> gets used for independent samples (between subjects) and the <strong>Wilcoxon signed rank test</strong> for dependent samples (within subjects).</p>
+<p>The <strong>Fisher’s Exact test</strong> (p.196) gets used for small or sparsely distributed data sets as an alternative to a Chi-Square test. Not asymptotic. Calculates exact p-values. As usual, we can reject the null hypothesis, if p &lt; 0.05.</p>
 </div>
 <div id="multivariate-analysis-or-pca" class="section level2">
 <h2>Multivariate Analysis or PCA</h2>
-<p>Assumptions:</p>
-<p>linearity and normality (not for Q-Mode, only for R-Mode)</p>
-<p>community questions useful for correllated things, because the idea is to combine things in order to get patterns if there are the same abundances of plant, they might have the same response to some aspect, so we are interested in the underliying drivers and conditions that cause those correllations</p>
+<div id="description-14" class="section level3">
+<h3>Description:</h3>
+<p>Used for community questions; useful for correllated things, because the idea is to combine things in order to get patterns. If there are the same abundances of plants, they might have the same response to some aspect, so we are interested in the underliying drivers and conditions that cause those correllations.</p>
+</div>
+<div id="assumptions-16" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- linearity
+- normality (not for Q-Mode, only for R-Mode)</code></pre>
 <p>Terminology <strong>R Mode</strong>: combine data on the basis of correlation, PCA, Principle coordinate analysis or principal correspondant analysis; the resulted variable from the combined variable can be used in any other analysis (univariate analysis), hypothesis test</p>
 <p>disadvantage/ assumptions: linearity and normality, likke running regressions</p>
 <p>Alternative/ <strong>Q Mode</strong>: is multidimensional scaling, anasim, permanova, work on the rows and not the columns; implication is the comnbinations you get they are not independent number, so cnnot be used in analysis like regression or mixed effects model or anything similar to that, because they are not independent to another on the plus side, flexible in the patterns things can be combined; don’t assume linearity and normality</p>
@@ -289,9 +905,11 @@ $(document).ready(function () {
 <li>if your stress has a certain value, then stop, determine a threshold of the stress value</li>
 <li>check (7)</li>
 </ol>
-<p>to combat what? (1) multiple random starts (2) you run a pco first to get a rough idea where they should or could be and than do another random start</p>
-<ol start="7" style="list-style-type: decimal">
-<li>procrustes rotation: the axis mean nothing; staple plots of the sites to see how much i stretched the sites left or right; they line up pretty close; we sum up the “residuals”, if it is leess than a certain number and then your ok; until you get a match, you stop</li>
+<p>to combat what?</p>
+<ol style="list-style-type: decimal">
+<li>multiple random starts</li>
+<li><p>you run a pco first to get a rough idea where they should or could be and than do another random start</p></li>
+<li><p>procrustes rotation: the axis mean nothing; staple plots of the sites to see how much i stretched the sites left or right; they line up pretty close; we sum up the “residuals”, if it is leess than a certain number and then your ok; until you get a match, you stop</p></li>
 </ol>
 <p>function metaMDS does the following:</p>
 <ul>
@@ -308,25 +926,78 @@ $(document).ready(function () {
 <p>Standardize to mean and variance (scale transformation - center and scale):</p>
 <p>Square root transformation is ok, because we don’t want to backtransform anyways, because the results of a multivariate analysis are dimensionless and unitless.</p>
 </div>
-<div id="glmm" class="section level2">
-<h2>GLMM</h2>
-<p>Generalized linear mixed effects models (pres. 11.2a)</p>
-<p>glmer</p>
-<p>glmmTBB : LaPlace newer approach in the package glmTBB</p>
-<p>Additional assumptions - dispersion - (multi)collinearity - design balance and Type III (marginal) SS - heteroscadacity - spatial/temporal autocorrelation</p>
 </div>
-<div id="gam" class="section level2">
-<h2>GAM</h2>
-<p>non-linear generalized additive models</p>
+<div id="bayesian-1" class="section level2">
+<h2>Bayesian</h2>
+<div id="description-15" class="section level3">
+<h3>Description:</h3>
 </div>
-<div id="mcmc" class="section level2">
-<h2>MCMC</h2>
-<p>Markov Chain Monte Carlo</p>
+<div id="assumptions-17" class="section level3">
+<h3>Assumptions:</h3>
+<pre><code>- something
+- something else</code></pre>
+</div>
+<div id="fit-the-model-1" class="section level3">
+<h3>Fit the model</h3>
+<p>Define your <strong>priors</strong> first. A prior is the prior of the slope. In Bayesian statistical inference, a prior probability distribution, often simply called the prior, of an uncertain quantity is the probability distribution that would <strong>express one’s beliefs</strong> about this quantity before some evidence is taken into account. The first prior is the one for the intercept. <strong>Normal prior?</strong> The <strong>auxiliary prior</strong> is the standard deviation, which you can leave out, when you have a poisson distribution, where you have counts and thus no deviation.</p>
+<p>The formula would look like this:</p>
+<pre><code>fert.rstanarm=stan_glm(YIELD~FERTILIZER, data=fert,
+                   prior_intercept=normal(0,100),
+                   prior = normal(0,100),
+                   prior_aux = cauchy(0,5),
+                   iter = 5000,
+                   warmup = 500,
+                   chains = 3, thin = 2)</code></pre>
+<p>whereas <strong>iter</strong> defines how many samples should be drawn, here 5000 iterations. <strong>warmup</strong> makes the first samples are going to be thrown out, because they might not be so good. For gaussian 10 % of the total iterations are ok; for others around 20-50%. <strong>chains</strong> describes how many chains we are going to use, which means how often it repeats and <strong>thin</strong> stands for how much thinning are we going to apply to reduce autocorrellation, it is USING every second sample.</p>
+<p>You still need to decide which model to fit your data with. This is an example for a <strong>random intercept model</strong>:</p>
+<pre><code>copper.stanP&lt;- stan_glmer(COUNT~COPPER*DIST+(1|PLATE) + offset(log(AREA)),
+                 data=copper,
+                 family='poisson',
+                 prior_intercept = normal(0,10),
+                 prior = normal(0,5),
+                 prior_covariance = decov(1,1,1,1),
+                 chains = 3, iter = 2000, warmup=500, thin=2)</code></pre>
+<p>Here is an example of a <strong>random intercept and random slope model</strong>, where ‘(DIST|PLATE)’ is used to describe the within block effect; the distance is the <strong>? effect</strong> and the plate is the random effect:</p>
+<pre><code>copper.stanP1&lt;- stan_glmer(COUNT~COPPER*DIST+(DIST|PLATE) + offset(log(AREA)),
+                 data=copper,
+                 family='poisson',
+                 prior_intercept = normal(0,10),
+                 prior = normal(0,5),
+                 prior_covariance = decov(1,1,1,1),
+                 chains = 3, iter = 2000, warmup=500, thin=2)</code></pre>
+</div>
+<div id="validate-the-model-1" class="section level3">
+<h3>Validate the model</h3>
+<p>Use the traceplot to check diagnostics in that way:</p>
+<pre><code>stan_trace(fert.rstanarm)</code></pre>
+<p>To <strong>compare both models</strong> check on the <strong>looic</strong> value, which should be lower for the better model. Use:</p>
+<pre><code>(l1=loo(copper.stanP))
+(l2=loo(copper.stanP1))</code></pre>
+</div>
 </div>
 <div id="import-and-export" class="section level2">
 <h2>Import and Export</h2>
+<div id="import-into-r" class="section level3">
+<h3>Import into R</h3>
 <p>In order to <strong>import</strong> a dataset, you need to convert an Excel file into a csv file.</p>
-<p>To <strong>export</strong> from R into a publication,</p>
+</div>
+<div id="export-to-publications" class="section level3">
+<h3>Export to publications</h3>
+<p>If you want to <strong>cite a package in a publication</strong>, type this:</p>
+<pre><code>citation(package='rstanarm')
+
+citation()</code></pre>
+<p>The last chunk of your markdown should always have this:</p>
+<pre><code>sessionInfo()</code></pre>
+</div>
+</div>
+<div id="friedman" class="section level2">
+<h2>Friedman</h2>
+<p>interact.gbm {gbm} R Documentation Estimate the strength of interaction effects</p>
+<p>Description</p>
+<p>Computes Friedman’s H-statistic to assess the strength of variable interactions.</p>
+<p>Usage</p>
+<p>interact.gbm(x, data, i.var = 1, n.trees = x$n.trees)</p>
 </div>
 </div>
 

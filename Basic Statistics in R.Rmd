@@ -9,38 +9,104 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# Section{.tabset}
+
+```{r}
+library(ggplot2)
+```
+
+
+# Basic Statistics in R {.tabset}
+
+  http://www.flutterbys.com.au/stats/
 
 ## Basics
 
-To create a **Markdown** file, click on 
+### Markdown
 
+To create a **Markdown** file, choose 'R Markdown" clicking on the plus symbol below the 'File' tab.
+
+Markdown trick: This addition in your chunk title will avoid to rerun the model in the Markdown file!!! Do not do that for your libraries though!
+
+    {r mckeonModel, cache=TRUE}
 
 
 ### Short cuts
 
-Control+Alt+i : insert new chunk
-
-Control+Shift+Enter : run current chunk
-
-Control+Shift+m : %>% 
+    Control+Alt+i : insert new chunk
+    Control+Shift+Enter : run current chunk
+    Control+Shift+m : %>% 
 
 ### Equations
 
-```{r}
-# $$ mu = 5 $$
-```
+http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html
 
-$$ mu = 5 $$
+To include equations into a text use only one dollar sign. If you wish to display the equation in a seperate line, then use two dollar signs.
 
+Here are some examples:
+
+    $$ \mu = 5 $$
+    
+$$ \mu = 5 $$
+Use this to make a fraction 
+    
+    $$ \frac{4z^3}{16}
+
+$$ \frac{4z^3}{\sqrt16} $$
+These are some special characters, such as bigger or smaller as:   
+    
+    $$a \pm b$$
+
+$$a \pm b$$
+
+    $$x \ge 15$$
+    
+$$x \ge 15$$
+
+    $$a_i \ge 0~~~\forall i$$
+    
+$$a_i \ge 0~~~\forall i$$
+To put big brackets use right and left commands
+    
+    $$\sum_{i=1}^{n}\left( \frac{X_i}{Y_i} \right)$$
+    
+$$\sum_{i=1}^{n}\left( \frac{X_i}{Y_i} \right)$$
+To display Greek letters, use the backslash before the greek word
+    
+    $$\alpha, \beta,  \gamma, \Gamma$$
+    
+$$\alpha, \beta,  \gamma, \Gamma$$
+This is the sum symbol:   
+    
+    $$ X = \sum_{i=1}^n X_i / n  $$ 
+    
+$$ X = \sum_{i=1}^n X_i  $$
+
+To use X bar, you will need to define it first within the equation:
+
+$$ \def\Xbar{\overline{X}}
+
+    \Xbar = \sum_{i=1}^n\frac {x_i}{n}  = \frac{x_1 + x_2 + ... + x_n}{n}$$
+
+
+$$ \def\Xbar{\overline{X}}
+\Xbar = ... $$
+
+
+### General
+
+Choose the first column by typing
+
+    [,1]
 
 ### Load datasets
 
-To load a dataset, you type : dataset<- read.csv('C:/Users/admin/Desktop/R-Course by Murray/07092018/dataset.csv', strip.white=T)
+To load a dataset, you type :
 
+    dataset<- read.csv('C:/Users/admin/Desktop/R-Course by Murray/07092018/dataset.csv', strip.white=T)
+    
 strip.white=T means, that you exclude all spaces in your excel file to avoid complications.
 
-For import, simply run the chunk, which contains your dataset
+For import, simply run the chunk, which contains your dataset.
 
 
 ### Github
@@ -62,81 +128,399 @@ You can create new repositories, create new branches, make and commit branches,
 
 https://select-statistics.co.uk/resources/glossary-page/
 
+http://www.ecologyandevolution.org/statsdocs/glossary.pdf
 
+**alpha** : Type I error
+
+**asymptotic** :
+
+**beta** : Type II error
+**beta** : regression coefficient
+
+**CV** : the coefficient of variation represents how data are spread relative to the mean of the population (mu) or sample (Xbar). SD is the standard deviation of a population (sigma) or a sample (s). It is used to compare the spread of data (quantitative) with the same units (in %) or to compare the variables between two groups with different units (unitless)!
+
+$$ CV = \frac{SD}{mean}$$
+
+**categorical variable vs. numeric** : a variable that is a category, such as yellow, blue, brown or high and low, etc. is a categorical as well as a qualitative variable, whereas numerics can take decimal or fractional values. They are considered quantative, such as intervals or ratios.
 
 **Chi-Square** :
 
-**confidence intervals** :
+**confidence intervals** : provides a confidence range that the true value lies in this range.
 
-**continous vs. discrete** : 
+**continuous vs. discrete** : a value that is measured numerically and can have a wide and infinite range of values (1, 2, ...) is continuous, whereas a discrete number has eiter one or the other outcome of a random variable, for example, head or tails.
 
 **degrees of freedom** :
 
-**dependent vs. independent variable** : 
+**dependent vs. independent variable** : the dependent variable y (DV) is also called the response variable. Loosely speaking, it "depends on" the independent variable. the independent x variable (IV), also called the predictor, is not depending on th dependent variable.
+
+**hat matrix** :
+
+**homogeneity of variance** : if the variance of ... is equal across ... variables
+
+**integer** : integers cannot take decimal or fractional values, while numerics can.
 
 **Maximum Likelihood** : gets used in generalized linear models
 
-**Multicolinearity** : When there are linear relationships (correlations) between two or more of the potential drivers; this can lead to difficulty in the interpretation of the model coefficients. Example: a questionnaire might ask whether the staff were friendly, and also whether they were helpful, which we would expect to be highly related. There are various statistical approaches that can be used to deal with multicollienarity, including the use of principal component analysis PCA to reduce the number of potential drivers to a set of linearly uncorrelated variables. 
+**multicollinearity** : When there are linear relationships (correlations) between two or more of the potential drivers; this can lead to difficulty in the interpretation of the model coefficients. Example: a questionnaire might ask whether the staff were friendly, and also whether they were helpful, which we would expect to be highly related. There are various statistical approaches that can be used to deal with multicollienarity, including the use of principal component analysis PCA to reduce the number of potential drivers to a set of linearly uncorrelated variables. 
 
-**numeric** : 
+**multiple regression** : a type of regression analysis that includes several independent variables.
 
-**OLS** : Least Squares; gets used in linear models
+**NMDS** : non multidimensional scale
+
+**non-parametric test** : a statistical test that does not assume that the data follow a particular 
+probability distribution.
+
+**offset** : is to standardize what?
+
+**OLS** : Ordinary Least Squares; concept gets used in linear models
+
+**overdispersed** :
+
+**overfitted** : in linear regression models, when the datapoints are spread like a curve, but the fitted regression line results as a vertical line, since the residuals sum up as 0.
+
+**overinflated** :
 
 **PCA** : principal component analysis
 
-**R Square** :
+**r** : Pearson's correlation coefficient
+
+**R Square** : A statistical parameter in regression analysis that measures the amount of variation in the dependent variable that is explained by variation in the independent variable.  In a scatterplot, the higher the R2, the more tightly the data will be clustered around the regression line. If all values fall on the line, R2=1. The value of R2 can vary from 0 to 1.
+
+**SRS** : simple random sampling
+
+**standard error versus standard deviation** : it is important to distinguish between the standard deviation of the data, which is a measure of variability or dispersion computed from the probability distribution function and the standard error, which provides you with certainty about the population mean as estimated from a specific sample.
+
+**standardization** : standardization of variables helps to compare units. 
+
+**univariate vs bivariate vs. multivariate** : univariate describe characteristics of one variable (e.g. mean and bar chart or histogram), bivariate describe characteristics of two variables (e.g. Pearson's correlation coefficient and scatterplot) and multivariate describe characteristics of many variable (e.g. multiple correlation and multivariate regression)
+
+
+## Statistical Introduction
+
+### Population
+
+A **population** is our subject of observation. Its mean mu is characterized by the following equation:
+
+$$ \mu = \sum_{i=1}^N\frac {x_i}{N}  = \frac{x_1 + x_2 + ... + x_N}{N}$$
+
+where
+    
+  $x_i$    is the sum of the datapoints
+  
+  $i=1$    from the first datapoint
+  
+  $N$      to all datapoints
+    
+
+The **variance** sigma square is the population variance, which describes the variance or distance from the mean. The following formula is used to describe a population:
+
+$$ \sigma^2 = \sum_{i=1}^N\frac {(x_i-\mu)^2}{N}$$
+
+The bigger the resulting value, the further away your datapoints are from the mean. The reason why we square within the formula is, because we aim to get a positive resulting value.
+
+For the **standard deviation** (SD) of a population, use the square root of the variance:
+
+$$ \sigma = \sqrt {\sigma^2}  $$
+
+### Sample
+
+A **sample** is a measurement taken from a population in order to infer about the population.
+
+The sample mean is called X bar with the according following formula:
+
+$$ \def\Xbar{\overline{X}}
+\Xbar = \sum_{i=1}^n\frac {x_i}{n}  = \frac{x_1 + x_2 + ... + x_n}{n}$$
+
+where n is the number of measurements taken.
+
+The sample **variance** is called s square and is based on this formula:
+
+$$  \def\Xbar{\overline{X}}
+s^2 = \sum_{i=1}^n\frac {(x_i-\Xbar)^2}{n}$$
+Alternatively use this formula:
+
+$$  \def\Xbar{\overline{X}}
+s^2 {_n-1} = \sum_{i=1}^n\frac {(x_i-\Xbar)^2}{n-1}$$
+
+Note the difference of n-1 in the formula, which is used to get a better estimate based on mathematical backgrounds. It is considered to be unbiased.
+
+For the **standard deviation** (SD) of a sample, use the square root of the variance:
+
+$$ s = \sqrt {s^2}  $$
+
+### Dependent and Independent Variables
+
+The **dependent or response variable** is the outcome of a study and described as Y, whereas the **independent variable or predictor variable** is influences the outcome and thus the dependent variable and described as Y. There is controversity about this however, since not in every case the causality is true and other factors might impact a correlation. THink of the fights and ice-cream example, where temperature is the co-factor leading to increase of ice cream and fights in summer instead of their direct causality.
+
+This leads to the **regression equation**
+
+$$Y=\beta_0+\beta_1X_1+\beta_2X_2+\beta_3X_3 + ... + e$$
+whereas **beta is the regression coefficient** and e is the error 
+
+### Standard error of mean (SEM)
+
+The **standard error** of the mean is related to the standard deviation (SD). The unit of the standard error of the mean is equal to the unit of the mean. The smaller this value, the better.
+
+$$ SEM = \frac{SD}{\sqrt n}$$
+
+### Sampling error
+
+The sampling error is a **natural sampling variability** expressed in the following formula
+
+$$ \def\Xbar{\overline{X}}
+sampling error = \mu - \Xbar$$
+
+### Confidence Intervals
+
+Mean, standard deviation and variance are **point estimates** to approximate a population parameter. On the other hand, the confidence intervals are expressing a range of values around the mean, which are **interval estimates**. They are used to get an idea of the spread of data (e.g. boxplot) and represent the upper and lower confidence limits or confidence bounds for a statistic.
+
+Confidence intervals get calculated by the standard errror of the mean. The upper 95% = x+(y*z), where x is the sample mean, y the standard error and z the 0.975 quartile of the normal distribution.
+
+$$ CI = Estimate \pm ME $$
+while ME stands for margin of error 
+
+The **confidence coefficient** is calculated as (1-alpha). Thus, if alpha is 0.05, the confidence coefficient is 0.95 or 95%.Journals often require that you report 95% confidence interval for your statistics!
+
+This is the way to present your confidence intervals:
+
+$$ \def\Xbar{\overline{X}}
+\Xbar-ME<\mu<\Xbar+ME$$
+
+where Xbar is the sample mean, ME is the margin of error (together representing the lower limit to the left and the upper limit to the right) and mu is the population mean.
+
+More precisely expressed in numbers:
+
+$$95<100<105$$
+
+In this way you interpret the CI in a correct manner: 95% of CI's for randomly selected samples will contain the population mean.
+
+Remember that CI is ANOTHER tool for estimation of a population parameter and used to compare between population parameters.
+
+**NOTE**: Especially with small datasets, you should provide confidence intervals!
+
+### Central Limit Theorem
+
+The Central Limit Theorem states that the sample distribution approximates a normal distribution, even if the distribution of the population is not normally distributed, if the sample size is sufficiently large.
+
 
 
 ## Libraries
 
-To install libraries in R type: install.packages("name_of_library")
+To **install** libraries in R type: install.packages("name_of_library"). To avoid R Studio to malfuntion when using libraries, better install libraries in R as an admin. Thus, when opening the program, right click and choose "run as an admin".
 
-To load libraries in R Studio type: library(name_of_library)
+To **load** libraries in R Studio type: library(name_of_library)
 
-**library(car)** : for regressions
+    library(broom)      : to use augment()
+    library(car)        : for regressions; to use scatterplotMatrix()
+    library(dplyr)      : NOTE: This library is implemented in tidyverse; contains main functions for data wranging
+    library(emmeans)    : for the function emmeans
+    library(effects)    : to use plot(alleffects)
+    library(glmTBB)     : to fit laPlace
+    library(ggfortify)  : to fit plots with autoplot()
+    library(ggplot2)    : to graph customised plots
+    library(INLA)       : used for Bayesian models to ? ; get it from here: install.packages("INLA", repos=c(getOption("repos"),
+                          INLA="https://inla.r-inla-download.org/R/stable"),dep=TRUE) and cancel chossing a cran, because it doesn't exist
+    library(knitr)      : includes funtion kable()
+    library(lme4)       : to fit lme and lmer
+    library(MASS)       : to fit glm
+    library(MuMIn)      : to create and compare AIC's
+    library(rstanarm)   : for Bayesian models
+    library(tidybayes)  : for Bayesian models
+    library(tidyverse)  : contains the libraries dplyr and tidyr and thus the main functions used to plot and
+                          manipulate your datasets; NOTE: Always load the the end to avoid masking of standard
+                          functions
+    library(vegan)      : for PCA's
 
-**library(emmeans)** : for the function emmeans
-
-**library(glmTBB)** : to fit laPlace
-
-**library(lme4)** : to fit lme and lmer
-
-**library(MuMIn)** : to compare AIC's
-
-**library(rstanarm)** : for Bayesian models
-
-**library(tidyverse)** : contains main functions, such as  NOTE: Always load the the end to avoid masking of standard functions
-
-**library(vegan)** : for PCA's
+AICc function either in MASS or knitr
 
 ## Functions
 
-**abline(data.model)** : to fit a regression line through your model
+### Check on Dataset
+
+    head()      - displays the first 6 rows of your dataset
+    
+```{r}
+head(pressure)
+```
+
+    summary()   - shows a summary for datasets or models
+
+```{r}
+summary(pressure)
+```
+    
+    str(pressure) - gives you an idea of the main structure of your dataset.
+    
+```{r}
+str(pressure)
+```
 
 ### Data wrangling
 
-**mutate** :
+    filter()    - filter out rows
+    arrange()   - sort data
+    select()    - select columns
+    mutate()    - create new columns
+    summarize() - perform stats
+    group_by()  - create groups
 
-**head(data)** : displays the first 6 rows of your dataset
+### Outputs
 
-### something else
+    kable()     - creates a table of your data
 
+### Bayesian
 
+    tidyMCMC(fert.rstanarm$stanfit,conf.int=TRUE, conf.method='HPDinterval', rhat=TRUE, ess=TRUE) - get confidence intervals
 
-## Plots
+### Plots
 
-**plot**
-
-**ggplot**
-
-**homogeneity** : 
-
-The **box plot** (a.k.a. box and whisker diagram) is a standardized way of displaying the distribution of data based on the five number summary: minimum, first quartile, median, third quartile, and maximum
-
-**scatterplot**
+    abline(data.model)    - fits a regression line through your plot
+    par()                 - is used to display many graphs in one window; most common function par(mfrows(1,3))
+    theme(classic)        - eliminates the background of the graph, so it appears entirely white.
 
 
-## Which model to choose?
+## Experimental design
+
+What to consider (sample size and rule of thumb to be larger than 30)
+
+
+
+### Hypothesis testing
+
+    1. Develop a research hypothesis that can be tested mathematically.
+    2. Formally state the null and alternative hypothesis.
+    3. Decide on an appropriate statistical test and do the calculations (dummy data for testing analysis)
+    4. Make your decision based on the results.
+    
+**Null hypothesis**
+
+(1) single-tailed: For example, a drug is less effective than or equal to the standard treatment.
+
+$$(1) H_0: \mu_1 ≤ \mu_2$$
+(2) two-tailed: For example, a drug has an effect over the standard treatment.
+
+$$(2) H_0: \mu_1 = \mu_2$$
+
+**Alternative hypothesis**
+
+(1) single-tailed: For example, a drug is more effective than the standard treatment.
+
+$$(1)H_1: \mu_1 > \mu_2$$
+(2) two-tailed: For example, a drug is has no effect over the standard treatment.
+
+$$(2)H_1: \mu_1 not = \mu_2$$
+
+**Note**: The null hypothesis and the alternative hypothesis need to be mutually exclusive!
+
+A small p-value (typically ≤ 0.05) indicates strong evidence against the null hypothesis, so you reject the null hypothesis. A large p-value (> 0.05) indicates weak evidence against the null hypothesis, so you fail to reject the null hypothesis.
+
+Hence:
+
+    p ≤ 0.05 :  reject H0
+    p > 0.05 :  accept H0
+    
+**Type I error** (alpha): Reject H0, when it is true
+
+**Type II error** (beta): Accept H0, when it is not true (and HA is true)
+
+
+## Data Management
+
+Prior to starting any analysis, check on the following things:
+
+    - Are there any missing data or duplicates?
+    - Is there any back-up (e.g. Github)?
+    - Does the dataset has outliers (trimmed mean)?
+    - Arrange the rows and columns in Excel accordingly for further analysis in R as an CSV-file (comma separated values)
+    - How were dates entered into Excel sheet? Often problems arise with dates entered.
+    - Is the labeling of the variables correct?
+    - Are the values for the variables reasonable?
+
+
+## Descriptive Statistics
+
+For **categorical data** the appropriate graphs are:
+
+    - barcharts
+    - pie charts
+    - frequency tables
+    - Pareto
+  
+For **continuous data** the appropriate graphs are:
+
+    - boxplots
+    - histograms
+    - scatterplots
+    - linegraphs
+
+### Barplot
+
+    barplot()
+
+```{r}
+#barplot()
+```
+
+### Boxplot
+
+The **box plot** (a.k.a. box and whisker diagram) is a standardized way of displaying the distribution of data based on the five number summary: minimum value of the response variable, first quartile, median and interquartile range, third quartile, and maximum value of the response variable. It is used to evaluate homogeneity. Furthermore, you can detect central tendency, range of data, symmetry and outliers.
+
+The according function is called boxplot(). Put your dataset into the brackets.
+
+```{r}
+boxplot(pressure)
+```
+
+### Histogram
+
+The **histogram** of the residuals can be used to check whether the variance is normally distributed. A symmetric bell-shaped histogram which is evenly distributed around zero indicates that the normality assumption is likely to be true. A rule of thumb for the bin width is the square root of the data points, but it shouldn't be <6.
+
+The according function is called hist(). Put your predictors (IV's) or the residuals? into the brackets.
+
+```{r}
+hist(pressure$temperature)
+```
+
+
+### Scatterplot
+
+A **scatterplot** is investigating the relationship between two variables in a linear model, while they are influenced by outliers..
+
+The according function is called scatterplot(). Put data points? into the brackets. Response variable on the y-axis and the predictor on the x-axis.
+
+
+### Linegraphs
+
+Choose the appropriate range of y-axis, so that it "frames" your data points, i.e. don't use a larger scale than necessary. This will skew your data and the underlying pattern.
+
+For fast and **standard plots** you can use the following function:
+
+    plot()
+
+```{r}
+plot(pressure)
+```
+
+
+To create more complex and **customized plots** you can make use of 
+
+    ggplot()
+
+```{r}
+ggplot(data=pressure, map=aes(y=pressure, x=temperature)) +
+  geom_point() +
+  geom_line() +
+  theme_classic()
+```
+
+For more details on graphing with ggplot, check on Grammar of Graphics by Murray Logan's R-course.
+
+
+### Heat Map
+
+
+
+## Which model to fit and how?
 
 https://help.xlstat.com/customer/en/portal/articles/2062461-which-statistical-model-should-you-choose-?b_id=9283
 
@@ -144,23 +528,37 @@ http://www.dataanalytics.org.uk/Data%20Analysis/Statistics/choosing-your-stats-t
 
 
 
-
-(1)  Fit the model
+### (1)  Fit the model
 
 Fitting a model to data means choosing the statistical model that predicts values as close as possible to the ones observed in your population.
 
 There are many keys to decide which distribution and model to fit. Start up with the following questions:
 
-(a) Is the data normally distributed? If yes, fit a lm. If not, normalize by log or other transformations.
+https://kevintshoemaker.github.io/NRES-746/GAMs.html
 
-(b) Which and how many dependent and independent variables does the experiment contain?
+    (a) What is the experimental design? Which and how many dependent and independent variables does the experiment contain? Does your experiment have random and/or fixed effects? If so, use mixed effects models.
 
-(c) Does your experiment have random and/or fixed effects? If so, use mixed effects models.
+    (b) Is the response normally distributed?
 
-(d) Do you prefer to use a Bayesian model?
+Test this with a **Normal Q-Q- Plot**, which is implemented in the autoplot function.
+
+If your data is normally distributed and follows the other assumption, fit a lm. If not, try to normalize by log or other transformations.
+
+If you have a bimodal distribution, try non-parametric techniques. Measures of central tendency like mean, median, etc. are useless in this case.
+
+    (c) Do(es) your predictor(s) has/have a linear relationship to your response?
+
+Predictors and response variables must have linear relationship; hence linear regressions are sensitive to outliers and data inaccuracy. This can be tested with scatterplots.
+
+    (d) Is there multicollinearity?
+    
+Tested with tolerance measures: T = 1 - R^2 (T < 0.1 indicates multicollinearity) or Variance inflation factor: VIF = 1/T (VIF >100 indicates multicollinearity)
+    
+    
+    (e) Do you prefer to use a Bayesian model?
 
 
-(2)  Validate the model
+### (2)  Validate the model
 
 There are different methods that you can use to do so. The best approach is to cross-validate and choose the model with the highest R² , which measures how much of the total variability in your data is accounted for by the model. However, as it is global measure of fit, a high R² doesn’t guarantee a valid model.
 Therefore, the main tool used is the Residual Analysis, which gives a more immediate and clear illustration of the relationship between the model and the data used.
@@ -169,53 +567,418 @@ While doing a statistial analysis, it’s very important to make sure about the 
 In a nutshell, validation is looking at the residuals vs. standardized residuals, Cook's distance, etc.
 If you deny the model, because these values don't look good, check for the lack of fit, which is a comparison to a chi square. The value that should be greater than 0.5.
 
-## Gaussian Model
-
-Assumptions:
-- normal distributed data
 
 
+## Normal Distribution
 
-## Poisson Model
+### Description:
 
-Assumptions:
+Normal distributions are described by the mean ($\mu/Xbar$) and the variance ($\sigma^2/s^2$).
 
-If the plot shows that there is a relationship between the mean and the variance, which you can see by the high noise near the low values and the rare dots at high values (called wedge), you cannot use models assuming a normal distribution, because it is a massive violation of linear regression.
+### Assumptions:
 
-Often non-normality and unequal variance are linked: if we fix one, we can fix the other. So we can log transform our data to make the dataset having a normal distribution. Log transformation is possible if there are no zeros, we can check by the function summary and check for the lowest value
+    - normally distributed data
+    - symmetry
+    - unimodality
+    - continuous range from negative infinity to positive infinity
+    - total area under the curve is 1 or 100%.
+    - common value for the mean, median and mode
 
-## Binomial model
+The normal distribution with a mean of 0 and a standard deviation of 1 is known as the standard normal distribution or z distribution. Any normal distribution can be transformed to the standard normal distribution by converting the original values to standardized scores or z-scores (see below), which facilitates comparison among population with different means and variances.
+
+If the mode is greater than the mean, the distribution is considered negatively skewed. Graphically the top of the bell curve shifts to the right. If the mode is smaller than the mean, it is positively skewed. In this case the bell curve shifts to the left opposite to what is expected.
+
+The 68 95 99 rule:
+
+    - about 68% will fall within 1 standard deviation of the mean (rare, but still common)
+    - about 95% will fall within 2 standard deviation of the mean (unusual)
+    - about 99% will fall within 3 standard deviation of the mean (quite unusual)
+    
+Insert graph
+
+### Data Transformation
+
+First, evaluate, if data transformation is appropriate. (1) Graph the data with a histogram, which also helps to identify outliers. Right-skewed data sets display high frequencies to the left, whereas left-skewed on the other hand show most data values on the right side of the graph. (2) Compute statistical test, such as the **Anderson-Darling test** (ad.test) or the **Kolmogorov-Smirnov test** (ks.test). If the P value is less than 0.05, your data is not normally distributed. You can also use the **Shapiro-Wilk test** to test if your distribution is normal. If the chosen alpha level is 0.05 and the p-value is less than 0.05, then the null hypothesis that the data are normally distributed is rejected.
+
+If you confront data, which is **not normally distributed**, you can **tranform your data** in different ways in order to get normally distributed data. (1) One way is the most common log-transformation. (2) Another, but less popular method is the square-root transformation. It is often difficult to interpret the results, since back-transformation is sometimes not possible. (3) You can also reflect the data. For this, you first detect your highest value and add 1 to it. In the following subtract each of the other values from that value. If you reflect a variable, this inverses the values, so that the highest score is now the lowest, which also inverses the interpretation of the results!
+
+NOTE: If you tranform your data, remember that the unit will be transformed as well!
+
+### t-test
+
+### Assumptions:
+
+    - samples are unrelated / independent (tested by correlation coefficient)
+    -> if samples are related use a paired t-test
+    - influenced by outliers (detected by boxplot or normal Q-Q; remove only when they are 2+ standard deviations from the mean)
+    - population variances of two groups are equal (tested by)
+    -> if variances are unequal use Welch-Satterthwaite test)
+    
+T tests using AT test allows you to test whether the mean of a sample differs significantly from an expected value or whether the means of 2 groups different significantly from each other. significance here means statistical significance and is related to the probability of committing a type one error. If you have one mean to test it is called a **One-Sample t-test** if you compare 2 different means it is called **Two-Sample t-test**.
+A type II error alpha is when you decide to reject the null hypothesis even though it is true. When the P value is less than 0.05 U reject the null hypothesis which supports your hypothesis. the t test is good for a sample size of less than 30.
+A T test Calculates the chance to commit a type one error. It depends on the degrees of freedom. There are tables that provides critical T values to make inferences about your hypothesis. The T test is mathematically equivalent to the analysis of variance ANova. The T distribution approximates a normal distribution Because if the number of sample increases (the sample size), the distribution becomes normal. It corresponds to the degrees of freedom. The T value T 0.05, 20 = 1.725 means that there is 0.05 significance level or P value, the degrees of freedom is 20 and the result is the critical T value taken from statistical tables.
+
+One assumption is the homogeneity of variance between 2 samples. The population distribution of 2 populations should be equal. They should be normal.
+
+The Two-Sample t-test is also known as the independent samples T test because the 2 samples are not related to each other. So this is a between subjects design. One assumption of this test is that both distributions must be normal and the population variances must be equal or homogeneous.
+In contrast to this we have the repeated measures T test also known as the dependent samples T test it is a within subjects design and it means that the the 2 samples are related to each others for example a treatment effect acts as its own control.
+
+To test if the variances of the samples are equal, you can use the Levene's test, the Brown and Forsythe test or Bartlett's test for 2 independent samples.
+If you do not have normality you should use non-parametric tests in contrast to parametric tests.
+
+Insert t valu formula. If the T value is outside of the range The null hypothesis will be accepted, which means the null hypothesis Can be rejected if the T value is within the range. So if it's outside this range you can not reject the null hypothesis.
+
+Unequal variance t test
+If the Variance of your t test is unequal you can use the unequal variance test Or **Welsh test**. It should be used when the variance is unknown or and the sample size is small
+However the calculation of degrees of freedom is more complicated.
+
+
+### Correlation Coefficient
+
+The correlation coefficient is testing, if two variables are correlated, and to quantify the degree of association between them.
+
+(1) Pearson's correlation coefficient r - with both variables measured on an interval or ratio scale
+
+r is an estimate of the population parameter rho($\rho$). If $\rho$ = 0 for two variables, the two variables are said to be independent.
+
+This is the formaula:
+
+$$r = \frac{\sum_{i=1}^n\frac {(x_i-\xbar)}{s_x}\frac {(y_i-\ybar)}{s_y}}{n-1}$$
+The resulting value ranges between -1 to +1, while values close to 0 represent a weak relationship, and high values representing strong (negative or positive) relationships.
+
+NOTE: Be aware of intermediate variables (ice-cream and fights - temperature)! Use common-sense and meaningful causative considerations.
+
+(2) Spearman rank-order coefficient - with both variables measured on ordinal scales
+
+This coefficient is used for ranks and ordinal relations. Thus, instead of the raw values, you sort your data by ranks and calculate the differences and squared differences between the ranks. To interpret the results, follow these general rules:
+
+  A moderate correlation is indicated by $0.5 ≤ r_s ≤ 0.5$.
+  
+  A strong correlation is indicated by $0.7 ≤ r_s ≤ 0.9$.
+  
+  A very strong correlation is indicated by $0.9 ≤ r_s ≤ 1$.
+
+(3) Point-biserial correlation coefficient - with one variable measured on a nominal/dichotomous scale and the other one on an interval or ratio scale
+
+This coefficient is used for categorical data, such as binomial data. For example, does love for animals increase the emotional intelligence. The response variable can be a measure with the predictor variable to be binomial. A result of 0.78 gives a high correlation between two variables.
+
+(4) phi - with both variables measured on a nominal/dichotomous scale
+
+This coefficient is used for categorical data and interval/ratio data. A result of 0.2 is demonstrating no relationship.
+
+
+### Coefficient of Determination
+
+The squared r provides a measure to calculate the proportion of variation in one variable that can be accounted for by the other variable. With $r^2$ you have a relativeness of values and can state, that $r^2 = 0$ is the double of $r^2 = 0.1$.
+
+When interpreting results, the number is the percentage of causation between two variables. For example, an $r^2 = 0.88$ means, that 88% of variation in CO2 emmissions (response) can be explained by the size of an engine (predictor).
+
+### Effect of size and power
+
+The effect of size and power should be calculated before the experiment. The effective size delta gets calculated by the mean of one sample minus the mean of the other sample divided by the sd. Large differences are easier to measured than small differences when the standard deviation and N are equal. For the statistical power you should choose beta. Beta is the probability of committing a type two error, so powers is defined as 1 minus beta.
+
+$$ \delta = \frac{\mu_1 - \mu_2}{\sigma}$$
+whereas mu1 is the mean of one sample and mu2 is the mean of an expected sample; and sigma is the standard deviation. The resulting effect size together with alpha=type 1 error (usually 0.05) with the aim to achieve power of 0.9 (i.e. where beta=type 2 error is 0.1, because power is defined as 1-beta), results in n by this calculation:
+
+$$ n = \frac{2(Z_\alpha/2 + Z_\beta)^2}{\delta^2}$$
+
+where delta is the effect size and Z alpha over 2 is the Z-score for alpha (usually 1.96, if you aim to have a confidence interval of 95% and thus your alpha is 0.025, because the area under the curve to the left ADDED to the one on the right is 0.05) and Z beta is the power, which is 1-beta (usually you aim for 90% power, so that beta is 0.01, which results in a Z-score of 1.28).
+
+To know how to get the z-score, check z-distribution
+
+### z-score and distribution
+
+Computing data points into z-scores, helps to judge whether your values are typical or atypical, i.e. how far the value is from the mean (usually more than 3 standard deviation is a rare value) and thus normalized your values, since they give you a unitless value.
+
+The formula for calculating z-scores is the following:
+
+$$Z=\frac{x-\mu}{\sigma}$$
+where x is the mean, mu the mean of and sigma the standard deviation.
+
+The formula in R is pnorm(-1.333=0.0912)
+
+
+Read the z-score from z-score-tables:
+
+1.  Open the z-score table online: http://www.z-table.com/
+2.  Check in the according table (left or right of the curve), for the closest value that you are aiming for and read the z-score to the left column and the top row.
+3. Include this value in the formula for effect size to compute the sample size minimum for statistical significance.
+
+
+## Poisson Distribution
+
+### Description:
+
+A poisson distribution is used
+when you have full counts, i.e. integers only, no point values (0.45, 5.67, etc...). Thus, we have a discrete distribution over a specified interval.
+
+[add notes from lecture]
+
+### Assumptions:
+
+    - something
+    - something else
+    
+
+
+## Binomial Distribution
+
+### Description:
+
+A binomial distribution is used for dichotomous outcomes, which means the outcome can **only take two possible values**), for instance when you have presence or absence data. Therefore, it can only take values with full counts, i.e. integers only, no point values (0.45, 5.67, etc...). Thus, we have a discrete distribution over a specified interval, which is influences by the probability of a positive outcome p and the sample size n. Rule of thumb: If n*p and n(1-p) >5, the binomial distribution resembles the normal distribution.
+
+### Assumptions:
+
+    - two outcomes possible only
+    - each trial is independent, so the result of one does not influence following outcomes
+    - probability is thus constant for every trial
+    - fixes number of trials (n)
+    
+This is the way to compute in R:
+
+
 
 ## Negative Binomial
 
+### Description:
+
+A negative binomial distribution is used, when you have counts, excessive zeros, big samples sizes or overdispersion in a poisson distribution.
+
+### Assumptions:
+
+    - something
+    - something else
+    
+
 ## Beta
+
+### Description:
+
+A beta model is used when your data is between 0 and 1, but not 0 or 1.
+
+### Assumptions:
+
+    - something
+    - something else
+
 
 ## Beta zero inflated
 
+### Description:
+
+### Assumptions:
+
+    - something
+    - something else
+
 ## Gamma
+
+### Description:
+
+A gamma distribution is used when you have data more than 0 to infinite.
+
+### Assumptions:
+
+    - all observation are independent, which means a person cannot be measured twice.
+    - the categories are exclusive so they cannot appear twice. They have to be distinguishable from the other categories.
+    - no cell has an expected value less than one and no more than 20% of the expect values than 5. That means it is not valid for spares data, in which one or more cells have a low expected frequency.
+    
+If you cannot meet these assumptions, you can use the Fisher's exact test or the Yates correction for continuity, of which the latter is not endorsed (empfohlen).
+
+### The Chi square distribution
+
+The **Chi square distribution** is a special case of the gamma distribution and has only one parameter K which specifies the degrees of freedom. This distribution has only positive values because it's based on the sum of squared quantities and that's why it's right skewed. If k approaches infinity, the chi square distribution becomes very similar to a normal distribution.
+There are tables of critical values for the Chi square distribution. Any test results above this critical value will be considered significant for a  chi square test of independence. You must know that degrees of freedom to evaluate a Chi square value. The critical value increases with the numbers of degrees of freedom
+
+### The Chi square test
+
+The Chi square test is one of the most common ways to examine relationships between 2 or more categorical variables. There are several types of Chi square tests. The most common is the Pearson Chi square test. There are actually 3 ways of using the Chi square test. The 1st is Chi square test for independence, the 2nd is the Chi square test for equality of proportions and the 3rd is the chi square test of goodness of fit.
+
+asymptotic
+
+1. The **Chi square test for independence** has the null hypothesis that the variables are independent of each other is that there is no relationship between them. In general the Chi square test relies on the difference between observed and expected values. The observed values is simply what you found or observed in the sample data set while the expected values are what you would have expected to find if the 2 variables were independent.
+We need to know if the values represents a significant result. The chi square test is based on the square difference between these observed and expected values in each cell using a certain formula.
+We would consult a chi square table to see if the Chi squared value calculate from our data exceeds the critical value for the relevant distribution. When doing an analysis on the computer, the chi square value, it's degrees of freedom and the P value are provided. If the P value is less than 0.05 we would normally reject the null hypothesis and conclude that the variables we studied are not.
+
+2. The **Chi square test for equality of proportions** is computed exactly the same way as the Chi square test for independence but the hypothesis is stated differently. The hypothesis is that the distribution of some variable is the same in all populations. So we test from multiple independent populations. For example we could test for different ethnic group. Whether the rate of a disease is the same or different across different populations.
+
+3. The **Chi square test of goodness of fit** is used to test the hypothesis that the distribution of a categorical valuable within a population follows a specific pattern of proportions while the alternative hypothesis is that the distribution of the variable follow some other patterns. For example, if we believe that a particular population has a certain percentage of blood pressure (40% normal 30% hypertension 20% pre hypertension), we can test this by drawing the sample and comparing it to the observed proportions with our hypothesis (the expected values). When we think of the degrees of freedom for the chi square goodness of fit test, they are one less than the number of groups. So if we have 3 groups of blood pressure, the degrees of freedoms are 3 - 1 so it is 2 . The result is a computed Chi square value. If it's higher than the critical value, it is highly significant and we reject the null hypothesis.
+
+McNemar's Test for Matched Pairs
+
+Used with data from paired samples.
+
+Page 199 Correlation statistics for categorical data
+
+Binary variables
+
+Phi is a measure of the degree of association between 2 binary variables such as two categorical variables. Phi is the same as r (the Pearson's correlation) when variables are scored as 0 and 1. The tetrachoric correlation coefficient gets used, if two binary variables are thought to represent underlying continuous measurement scales. For instance if test scores on a scale of 0 to 100 are dichotomized for analytical purposes as pass or fail.
+
+Ordinal variables
+
+For ordinal variables You can use the Spearman's rank order coefficient. It gets favoured over Phi correlation to lessen the influence of outliers. The goodman and Kruskals gamma is also used for ordinal variables by calculating the number of Concordant and and discordant pairs among 2 variables. Two variables can have a positive relationship. A concordant pair is when case 2 has a higher value on the 1st variable than case one. so you would expect that case 2 also has a higher variable value on the 2nd variable. A discordant pair is when  unexpectedly case 2 had a lower value on the 2nd variable.
+
+Insert Picture of Gamma measurements
+
+You have 2 ordinal variables And 3 ordinal variables .... For example BMI Normal and overweight And blood pressure Normal, prehypertensive And hypertensive. Each cell Gets designated with Letters A B C D E F and used for calculations.
+
+Gamma is a symmetrical measure, because it doesn't matter which variable is considered the predictor and which the outcome. There are some alternatives to the gamma measurements:
+1. Kendall's tau-a is based on the number of concordant and disconcordant pairs divided by a measure based on the total number of pairs.
+2. Kendall's tau-b is a similar measure based on concordant and disconcordant pairs adjusted for the number of ties and ranks.
+3. Kendall's tau-c is used for non square tables and has a known sampling distribution.
+4. Somers's d is an asymmetrical version of gamma. So the calculation of the statistic varies depending on which my readers consider the predictor and which the outcome.
+
+When you have a chi square distribution and want to calculate the degrees of freedom the formulas is r-1 multiplied with C -1 which is the number of rows -1 times the number of columns -1. For example a 2 x 2 table has 1ﾟ degree of freedom because you have two rows -1 multiplied with 2 columns -1 so you end up with 1 multiplied with 1. For a 3 x 5 table the degrees of freedom are 8 because you have 3 rows -1 multiplied with 5 rows -1 which is 2 multiplied with 4 or 8.
+
+Null hypothesis for Chi square test is no relationship between variables and thus independent. If chi square value exceeds the critical value, which is based on df, we reject null hypothesis that variables are independent. Hence, the variables are related. If P value < 0.05, reject null hypothesis.
+
+
+## GLM
+
+### **Linear Model**
+
+### Description:
+
+Linear Regression Analysis
+
+### Assumptions:
+
+    - normality
+    - something else
+    
+(1) Descriptive Statistic:
+
+A graphic analysis can be computed by a **scatterplot** investigating the relationship between two variables.
+
+(2) Inferential Statistic
+
+For statistical support of your statement, you can calculate the **R2** of your two variables to show the strength of the correlation between your two variables.
+
 
 ## ANOVA
 
+### Description:
+
+Anova is used to test the statistical difference between two groups
+
+### Assumptions:
+
+    - Normality
+    - Independence
+    - Equality of variances (compute a boxplot to check on variance; there should be no relation between mean and variance, such as the variance increases with a higher mean; and Levene's or Bartlett's test)
+    
+If normality is not met and the sample sizes between two groups are inequal, compute a non-parametric test, such as the **Kruskall-Wallis** test.
+If all assumptions are met, but the sample size is unequal only, compute a **Tukey-Kramer** adjustment.
+
+
+## MANOVA
+
+### Assumptions:
+
+    - Normality
+    - Independence
+    - Equality of variances (compute a boxplot to check on variance; there should be no relation between mean and variance, such as the variance increases with a higher mean; and Levene's or Bartlett's test)
+    - equality of variance-covariance (tested bythe Box-test)
+    
+    
+If r>0.8, consider a PCA, where multicolinearity arises.
+
+Remove outliers, if they are greater than 2 standard deviations from the mean.
+
+
 ## ANCOVA
 
-Assumptions:
+### Description:
 
-- linearity of regression
-- homogeneity of error variances
-- independence of error terms
-- normality of error terms
-- homogeneity of error slopes
+### Assumptions:
+
+    - linearity of regression
+    - homogeneity of error variances
+    - independence of error terms
+    - normality of error terms
+    - homogeneity of error slopes
+
+
+
+## GLMM
+
+### Description:
+
+Generalized linear mixed effects models (pres. 11.2a)
+
+glmer
+
+glmmTBB : LaPlace newer approach in the package glmTBB
+
+### Assumptions:
+
+    - something
+    - something else
+
+Additional assumptions:
+
+    - dispersion
+    - (multi)collinearity
+    - design balance and Type III (marginal) SS
+    - heteroscadacity
+    - spatial/temporal autocorrelation
+
+## GAM
+
+### Description:
+
+A generalized additive model (GAM) is a generalized linear model in which the linear predictor depends linearly on unknown smooth functions of some predictor variables. GAM can handle non-linear, linear and non-monotonic relationships between response and predictor variables.
+
+### Assumptions:
+
+    - something
+    - something else
+    
+
+## MCMC
+
+### Description:
+
+Markov Chain Monte Carlo
+
+### Assumptions:
+
+    - something
+    - something else
+
+
+## NMDS = PCA?
+
+### Description:
+
+Non-metric multidimensional scaling (NMDS) is an indirect gradient analysis approach which produces an ordination based on a distance or dissimilarity matrix. It's a rank-based approach.
+
+https://jonlefcheck.net/2012/10/24/nmds-tutorial-in-r/
+
+### Assumptions:
+
+    - something
+    - something else
+
+## Non-parametric tests
+
+You can use non-parametric analysis tests as an alternative to parametrics, if you don't meet the assumption of a normally distributed sample after data transformation. However, these are less powerful, but often have fewer or no assumptions about the data distribution.
+
+The **Mann-Whitney U test** gets used for independent samples (between subjects) and the **Wilcoxon signed rank test** for dependent samples (within subjects).
+
+The **Fisher's Exact test** (p.196) gets used for small or sparsely distributed data sets as an alternative to a Chi-Square test. Not asymptotic. Calculates exact p-values. As usual, we can reject the null hypothesis, if p < 0.05.
 
 
 ## Multivariate Analysis or PCA
 
-Assumptions:
+### Description:
 
-linearity and normality (not for Q-Mode, only for R-Mode)
+Used for community questions; useful for correllated things, because the idea is to combine things in order to get patterns. If there are the same abundances of plants, they might have the same response to some aspect, so we are interested in the underliying drivers and conditions that cause those correllations.
 
-community questions
-useful for correllated things, because the idea is to combine things in order to get patterns
-if there are the same abundances of plant, they might have the same response to some aspect, so we are interested in the underliying drivers and conditions that cause those correllations
+### Assumptions:
+
+    - linearity
+    - normality (not for Q-Mode, only for R-Mode)
 
 Terminology
 **R Mode**: combine data on the basis of correlation, PCA, Principle coordinate analysis or principal correspondant analysis; the resulted variable from the combined variable can be used in any other analysis (univariate analysis), hypothesis test 
@@ -272,6 +1035,7 @@ When to stop your iterations?
 (2) check (7)
 
 to combat what?
+
 (1) multiple random starts
 (2) you run a pco first to get a rough idea where they should or could be and than do another random start
 
@@ -295,32 +1059,105 @@ Standardize to mean and variance (scale transformation - center and scale):
 
 Square root transformation is ok, because we don't want to backtransform anyways, because the results of a multivariate analysis are dimensionless and unitless.
 
-## GLMM
+  
+## Bayesian
 
-Generalized linear mixed effects models (pres. 11.2a)
+### Description:
 
-glmer
 
-glmmTBB : LaPlace newer approach in the package glmTBB
 
-Additional assumptions
-- dispersion
-- (multi)collinearity
-- design balance and Type III (marginal) SS
-- heteroscadacity
-- spatial/temporal autocorrelation
+### Assumptions:
 
-## GAM
+    - something
+    - something else
+    
+### Fit the model
 
-non-linear generalized additive models
+Define your **priors** first. A prior is the prior of the slope. In Bayesian statistical inference, a prior probability distribution, often simply called the prior, of an uncertain quantity is the probability distribution that would **express one's beliefs** about this quantity before some evidence is taken into account. The first prior is the one for the intercept. **Normal prior?** The **auxiliary prior** is the standard deviation, which you can leave out, when you have a poisson distribution, where you have counts and thus no deviation.
 
-## MCMC
+The formula would look like this:
 
-Markov Chain Monte Carlo
+    fert.rstanarm=stan_glm(YIELD~FERTILIZER, data=fert,
+                       prior_intercept=normal(0,100),
+                       prior = normal(0,100),
+                       prior_aux = cauchy(0,5),
+                       iter = 5000,
+                       warmup = 500,
+                       chains = 3, thin = 2)
+
+whereas **iter** defines how many samples should be drawn, here 5000 iterations. **warmup** makes the first samples are going to be thrown out, because they might not be so good. For gaussian 10 % of the total iterations are ok; for others around 20-50%. **chains** describes how many chains we are going to use, which means how often it repeats and **thin** stands for how much thinning are we going to apply to reduce autocorrellation, it is USING every second sample.
+
+You still need to decide which model to fit your data with. This is an example for a **random intercept model**:
+
+    copper.stanP<- stan_glmer(COUNT~COPPER*DIST+(1|PLATE) + offset(log(AREA)),
+                     data=copper,
+                     family='poisson',
+                     prior_intercept = normal(0,10),
+                     prior = normal(0,5),
+                     prior_covariance = decov(1,1,1,1),
+                     chains = 3, iter = 2000, warmup=500, thin=2)
+
+Here is an example of a **random intercept and random slope model**, where '(DIST|PLATE)' is used to describe the within block effect; the distance is the **? effect** and the plate is the random effect:
+
+    copper.stanP1<- stan_glmer(COUNT~COPPER*DIST+(DIST|PLATE) + offset(log(AREA)),
+                     data=copper,
+                     family='poisson',
+                     prior_intercept = normal(0,10),
+                     prior = normal(0,5),
+                     prior_covariance = decov(1,1,1,1),
+                     chains = 3, iter = 2000, warmup=500, thin=2)
+
+### Validate the model
+
+Use the traceplot to check diagnostics in that way:
+  
+    stan_trace(fert.rstanarm)
+    
+To **compare both models** check on the **looic** value, which should be lower for the better model. Use:
+
+    (l1=loo(copper.stanP))
+    (l2=loo(copper.stanP1))
+
+
+
+
+
 
 ## Import and Export
 
+### Import into R
+
 In order to **import** a dataset, you need to convert an Excel file into a csv file.
 
-To **export** from R into a publication, 
 
+### Export to publications
+
+If you want to **cite a package in a publication**, type this:
+
+    citation(package='rstanarm')
+    
+    citation()
+    
+The last chunk of your markdown should always have this:
+
+    sessionInfo()
+    
+    
+    
+    
+    
+## Friedman
+
+
+interact.gbm {gbm}	R Documentation
+Estimate the strength of interaction effects
+
+Description
+
+Computes Friedman's H-statistic to assess the strength of variable interactions.
+
+Usage
+
+interact.gbm(x, data, i.var = 1, n.trees = x$n.trees)
+    
+    
